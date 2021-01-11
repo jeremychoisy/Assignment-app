@@ -1,3 +1,2 @@
-export * from './assignment';
-export * from './school-subject';
-export * from './user';
+export * from './api';
+export * from './data';

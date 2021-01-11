@@ -6,9 +6,10 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class HttpClientWrapperService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+  }
 
-  private buildAuthorizationHeader(): {headers: {[header: string]: string | string[]}} | {} {
+  private buildAuthorizationHeader(): { headers: { [header: string]: string | string[] } } | {} {
     const token = sessionStorage.getItem('token');
     return token && {headers: {Authorization: 'Bearer ' + token}} || {};
   }

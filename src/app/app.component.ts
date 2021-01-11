@@ -11,6 +11,7 @@ import {Assignment} from './models/index';
 export class AppComponent {
   // Testing
   public assignmentTest$: Observable<Assignment>;
+
   constructor(private assignmentApiService: AssignmentApiService) {
     this.assignmentTest$ = this.assignmentApiService.getAssignment('5ffa5d5f5c3abb756433809a');
   }

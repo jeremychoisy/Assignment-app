@@ -1,4 +1,3 @@
-import {Assignment} from './assignment';
 import {SchoolSubject} from './school-subject';
 import {MongoEntity} from './mongo-entity';
 
@@ -13,6 +12,4 @@ export interface User extends MongoEntity {
   avatarUrl: string;
   creationDate?: Date;
   subjects: SchoolSubject[];
-  pendingAssignments: Assignment[];
-  submittedAssignments: Assignment[];
 }
