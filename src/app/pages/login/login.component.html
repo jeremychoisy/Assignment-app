@@ -1,0 +1,39 @@
+<mat-card class="horizontalCard">
+
+  <mat-card-header>
+    <mat-card-title>Connexion</mat-card-title>
+    <mat-card-subtitle><a href="mailto: admin@gmail.com">Si vous n'avez pas de compte demander un accès ici</a>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="cardBody">
+    <form [formGroup]="formGroup" (ngSubmit)="logAccount(formGroup.value)" class="form">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Adresse e-mail</mat-label>
+          <input matInput formControlName="account">
+          <mat-error
+            *ngIf="formGroup.controls['account'].invalid && formGroup.controls['account'].touched">{{getAccountError()}}</mat-error>
+          <mat-icon matSuffix>alternate_email</mat-icon>
+              </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Saisissez votre mot de passe</mat-label>
+          <input matInput [type]="hidepassword ? 'password' : 'text'" formControlName="password">
+          <mat-error
+            *ngIf="formGroup.controls['password'].invalid && formGroup.controls['password'].touched">{{getPasswordError()}}</mat-error>
+          <button mat-icon-button matSuffix (click)="hidepassword = !hidepassword" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hidepassword">
+            <mat-icon>{{hidepassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+           </mat-form-field>
+      </div>
+
+      <div id="submitDiv">
+        <button mat-stroked-button color="primary" type="submit" [disabled]="!formGroup.valid">Login</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
