@@ -1,2 +1,30 @@
-<div [innerHTML]="assignmentTest$ | async | json"></div>
-<router-outlet></router-outlet>
+<mat-toolbar class="toolbar" color="primary">
+  <div class="left-section">
+  <button mat-icon-button class="home-icon" aria-label="home icon" [routerLink]="'/'">
+    <mat-icon>home</mat-icon>
+  </button>
+  <span>Assignment Application</span>
+  </div>
+  <div class="right-section">
+    <button mat-icon-button class="login-icon" aria-label="login icon">
+      <mat-icon>login</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+<app-layout>
+  <div header>
+    <!--TODO-->
+  </div>
+  <div messagePanels>
+    <app-message-panel class="success-message-panel" [type]="'success'"></app-message-panel>
+    <app-message-panel class="error-message-panel" [type]="'error'"></app-message-panel>
+  </div>
+  <div mainContent>
+    <router-outlet></router-outlet>
+  </div>
+  <div footer class="footer">
+    <p>About us</p>
+    <p>André DA SILVA GONCALVES</p>
+    <p>Jérémy CHOISY</p>
+  </div>
+</app-layout>

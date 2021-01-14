@@ -1,13 +1,12 @@
-import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpClientWrapperService {
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   private buildAuthorizationHeader(): { headers: { [header: string]: string | string[] } } | {} {
     const token = sessionStorage.getItem('token');

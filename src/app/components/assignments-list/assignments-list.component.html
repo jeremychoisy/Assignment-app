@@ -1,1 +1,19 @@
-<p>assignments-list works!</p>
+<div cdkDropListGroup>
+  <div class="done-assignments"
+       cdkDropList
+       [cdkDropListData]="doneAssignments"
+       (cdkDropListDropped)="drop($event)">
+    <mat-card *ngFor="let assignment of doneAssignments;let index = index" cdkDrag>
+      <span [innerHTML]="'assignment ' + index"></span>
+    </mat-card>
+  </div>
+  <div class="on-going-assignments"
+       cdkDropList
+       [cdkDropListData]="onGoingAssignments"
+       (cdkDropListDropped)="drop($event)">
+    <mat-card *ngFor="let assignment of onGoingAssignments;let index = index" cdkDrag>
+      <span [innerHTML]="'assignment ' + (index + 5)"></span>
+    </mat-card>
+  </div>
+</div>
+<ng-template #noAssignment></ng-template>

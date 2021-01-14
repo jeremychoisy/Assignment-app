@@ -1,5 +1,5 @@
-import {UserState} from './user.state';
 import {createReducer, on} from '@ngrx/store';
+import {UserState} from './user.state';
 
 import * as UserActions from './user.actions';
 

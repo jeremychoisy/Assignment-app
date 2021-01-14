@@ -1,6 +1,8 @@
+import {MongoEntity} from './mongo-entity';
 import {SchoolSubject} from './school-subject';
 import {User} from './user';
-import {MongoEntity} from './mongo-entity';
+
+export type AssignmentType = 'done' | 'onGoing';
 
 export interface Assignment extends MongoEntity {
   name: string;

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClientWrapperService} from './http-client-wrapper.service';
 import {Observable} from 'rxjs';
-import {Assignment} from '../models/index';
-import {apiConfig} from '../config/index';
 import {map} from 'rxjs/operators';
+import {apiConfig} from '../config/index';
+import {Assignment} from '../models/index';
+import {HttpClientWrapperService} from './http-client-wrapper.service';
 
 @Injectable({
   providedIn: 'root'

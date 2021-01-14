@@ -7,7 +7,6 @@ import {UserEffects} from './user.effects';
 import {USER_STORE_NAME} from './user.state';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     StoreModule.forFeature(USER_STORE_NAME, reducer),

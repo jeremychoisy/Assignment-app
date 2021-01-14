@@ -1,5 +1,5 @@
-import {SchoolSubject} from './school-subject';
 import {MongoEntity} from './mongo-entity';
+import {SchoolSubject} from './school-subject';
 
 export type UserLevel = 'student' | 'teacher';
 

@@ -1,6 +1,6 @@
 import {createAction, props} from '@ngrx/store';
-import {LogInReply, User} from '../../models/index';
 import {Observable} from 'rxjs';
+import {LogInReply, User} from '../../models/index';
 
 export const logInUserFromApi = createAction(
   '[User/API] log in the user from the API',

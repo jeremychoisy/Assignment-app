@@ -1,0 +1,8 @@
+<ng-container *ngIf="(messages$ | async) as messages">
+  <mat-card *ngIf="messages.length">
+    <h2 [innerHTML]="type === 'error' ? 'Error' : 'Success'"></h2>
+    <ul>
+      <li *ngFor="let message of messages" [innerHTML]="message.content"></li>
+    </ul>
+  </mat-card>
+</ng-container>

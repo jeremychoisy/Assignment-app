@@ -1,0 +1,28 @@
+.app-layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .app-header-container {
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .app-message-panels-container {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+  }
+
+  .app-main-content-container {
+    flex: 1 0 auto;
+    margin: 0 2rem;
+  }
+
+  .app-footer-container {
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+}

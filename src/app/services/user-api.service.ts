@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClientWrapperService} from './http-client-wrapper.service';
 import {Observable} from 'rxjs';
 import {apiConfig} from '../config/index';
 import {LogInReply} from '../models/index';
+import {HttpClientWrapperService} from './http-client-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
