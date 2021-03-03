@@ -12,9 +12,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
+import { AssignmentComponent } from './components/assignment/assignment.component';
+import { SchoolSubjectComponent } from './components/school-subject/school-subject.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent],
+  declarations: [AppComponent, LoginComponent, HomeComponent, AssignmentComponent, SchoolSubjectComponent],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,

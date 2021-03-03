@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../services';
 import {Router} from '@angular/router';
+import {SchoolSubject} from '../../models';
+import {CreateData} from '../../utils/createData';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +11,18 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  listSchoolSubject: SchoolSubject[] = [];
+
+  constructor(private authService: AuthService, private router: Router, private createDataUtils: CreateData) {
+    // getList of school subject with the user access
+    this.listSchoolSubject = createDataUtils.listSchoolSubject.filter(item => item.teacher.name === 'Michel');
+
+  }
 
   ngOnInit(): void {
   }
 
-  logout(): void{
+  logout(): void {
     this.authService.logout();
     this.router.navigateByUrl('/login');
   }
