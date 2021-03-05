@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-login',
@@ -36,8 +35,8 @@ export class LoginComponent implements OnInit {
   }
 
   logAccount(): void {
-    this.authService.login(this.formGroup.value);
-     /* .pipe(
+    /* this.authService.login(this.formGroup.value);
+      .pipe(
         take(1)
       ).subscribe((res) => {
       if (res) {

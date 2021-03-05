@@ -1,9 +1,8 @@
 <mat-card class="card">
   <mat-card-header>
-    <div mat-card-avatar
-         style="'background-size' : cover; 'background-image': 'url('{{currentSchoolSubject.subjectPictureUrl}}')';"></div>
+    <img src="{{currentSchoolSubject.subjectPictureUrl}}" alt="Image of school subject" class="subjectImage">
     <mat-card-title>{{currentSchoolSubject.name}}</mat-card-title>
-    <mat-card-subtitle>{{currentSchoolSubject.teacher}}</mat-card-subtitle>
+    <mat-card-subtitle>{{currentSchoolSubject.teacher.name}} {{currentSchoolSubject.teacher.lastName}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <p>

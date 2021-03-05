@@ -10,10 +10,12 @@ import {CreateData} from '../../utils/createData';
 })
 export class AssignmentComponent implements OnInit {
   @Input()
-  public currentAssignment?: Assignment;
+  public currentAssignment!: Assignment;
+  private createDataUtils: CreateData;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private createDataUtils: CreateData) {
+  constructor(private route: ActivatedRoute) {
+    this.createDataUtils = new CreateData();
   }
 
   ngOnInit(): void {

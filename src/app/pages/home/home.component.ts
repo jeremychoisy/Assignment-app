@@ -13,10 +13,10 @@ export class HomeComponent implements OnInit {
 
   listSchoolSubject: SchoolSubject[] = [];
 
-  constructor(private authService: AuthService, private router: Router, private createDataUtils: CreateData) {
+  constructor(private authService: AuthService, private router: Router) {
     // getList of school subject with the user access
-    this.listSchoolSubject = createDataUtils.listSchoolSubject.filter(item => item.teacher.name === 'Michel');
-
+    const createDataUtils = new CreateData();
+    this.listSchoolSubject = createDataUtils.listSchoolSubject.filter(item => item.teacher.lastName === 'Michel');
   }
 
   ngOnInit(): void {

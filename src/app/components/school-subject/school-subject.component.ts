@@ -10,16 +10,17 @@ import {Router} from '@angular/router';
 export class SchoolSubjectComponent implements OnInit {
 
   @Input()
-  public currentSchoolSubject?: SchoolSubject;
+  public currentSchoolSubject!: SchoolSubject;
 
   constructor(private router: Router) {
+    console.log(this.currentSchoolSubject);
   }
 
   ngOnInit(): void {
   }
 
   seeMore(): void {
-    this.router.navigate(['/assignment', this.currentSchoolSubject?._id]);
+    this.router.navigate(['/assignment', this.currentSchoolSubject._id]);
   }
 
 }
