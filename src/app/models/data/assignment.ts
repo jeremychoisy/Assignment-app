@@ -10,6 +10,6 @@ export interface Assignment extends MongoEntity {
   subject: SchoolSubject;
   score: number;
   creationDate?: Date;
-  submissionDate: Date;
+  submissionDate?: Date;
   isSubmitted: boolean;
 }

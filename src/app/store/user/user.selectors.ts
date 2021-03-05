@@ -1,7 +1,7 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {USER_STORE_NAME, UserState} from './user.state';
+import {UserState, USER_STORE_NAME} from './user.state';
 
-const selectUserState = createFeatureSelector<UserState>(USER_STORE_NAME);
+export const selectUserState = createFeatureSelector<UserState>(USER_STORE_NAME);
 
 export const selectUser = createSelector(selectUserState, (state) => state.user);
 export const selectUserStoreLoadingStatus = createSelector(selectUserState, (state) => state.isLoading);
