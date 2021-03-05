@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
-import {UserApiService} from '../../services';
+import {RoutesEnum} from '../../models/enums/index';
+import {UserApiService} from '../../services/index';
 import {logInUserFromApi, UserStore} from '../../store';
 
 @Component({
@@ -12,8 +13,8 @@ import {logInUserFromApi, UserStore} from '../../store';
 })
 export class LoginPageComponent implements OnInit {
 
-  formGroup!: FormGroup;
-  hidepassword = true;
+  public formGroup!: FormGroup;
+  public isPasswordHidden = true;
 
 
   constructor(
@@ -49,7 +50,7 @@ export class LoginPageComponent implements OnInit {
       this.store.dispatch(logInUserFromApi({
         call: this.userApiService.logIn(account, password)
       }));
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl(RoutesEnum.home);
     }
   }
 }

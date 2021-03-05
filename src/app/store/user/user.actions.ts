@@ -16,3 +16,7 @@ export const setUserFailureStatus = createAction(
   '[User] set user store failure status',
   props<{ status: number }>()
 );
+
+export const logOutUser = createAction(
+  '[User/API] log out the user'
+);

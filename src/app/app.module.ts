@@ -1,5 +1,8 @@
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EffectsModule} from '@ngrx/effects';
@@ -11,8 +14,7 @@ import {AppComponent} from './app.component';
 import {MessagePanelModule} from './components/message-panel/message-panel.module';
 import {AppLayoutModule} from './layout/app-layout/app-layout.module';
 import {MessageStoreModule} from './store/message/message.module';
-import {MatIconModule} from "@angular/material/icon";
-import {MatToolbarModule} from "@angular/material/toolbar";
+import {UserStoreModule} from './store/user/user.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +33,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     AppLayoutModule,
     MatIconModule,
     MatToolbarModule,
+    UserStoreModule,
+    MatButtonModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

@@ -1,18 +1,19 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {RoutesEnum} from './models/enums/index';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./pages/login/login-page.module').then((m) => m.LoginPageModule)
-  },
-  {
-    path: 'home',
+    path: RoutesEnum.home,
     loadChildren: () => import('./pages/home-page/home-page.module').then((m) => m.HomePageModule)
   },
   {
+    path: RoutesEnum.login,
+    loadChildren: () => import('./pages/login/login-page.module').then((m) => m.LoginPageModule)
+  },
+  {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: RoutesEnum.home,
     pathMatch: 'full'
   },
 ];

@@ -6,8 +6,12 @@
   <span>Assignment Application</span>
   </div>
   <div class="right-section">
-    <button mat-icon-button class="login-icon" aria-label="login icon">
-      <mat-icon>login</mat-icon>
+    <button *ngIf="isUserLogged$ | async"
+            mat-icon-button
+            class="logout-icon"
+            aria-label="logout icon"
+            (click)="logOut()">
+      <mat-icon>logout</mat-icon>
     </button>
   </div>
 </mat-toolbar>
