@@ -1,4 +1,4 @@
-.create-assignment-form {
+.name-form, .subject-form, .submission-date-form, .remarks-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,4 +12,8 @@
     width: 75%;
     margin-bottom: 60px;
   }
+}
+
+.stepper-button {
+  margin: 10px;
 }

@@ -1,27 +1,59 @@
-<form [formGroup]="assignmentForm" (ngSubmit)="createAssignment()" class="create-assignment-form" #formDirective="ngForm">
-    <mat-form-field class="form-field">
-        <mat-label>Choose a name</mat-label>
-        <input matInput type="text" formControlName="name">
-        <mat-error>A name is required.</mat-error>
-    </mat-form-field>
-    <mat-form-field class="form-field">
-        <mat-label>Choose a subject</mat-label>
-        <mat-select formControlName="subject">
-            <mat-option [value]="'6042befc7008e500177cc04c'">Angular JS</mat-option>
-        </mat-select>
-        <mat-error>A subject is required</mat-error>
-    </mat-form-field>
-    <mat-form-field class="form-field">
-        <mat-label>Choose a submission date</mat-label>
-        <input matInput [min]="today" [matDatepicker]="picker" formControlName="submissionDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error>A submission date is required</mat-error>
-    </mat-form-field>
-    <mat-form-field class="form-field remarks">
-        <mat-label>Add some remarks</mat-label>
-        <textarea matInput type="textarea" formControlName="remarks"></textarea>
-    </mat-form-field>
-    <button mat-raised-button color="primary" class="create-button" type="submit" [disabled]="!assignmentForm.valid">Create assignment</button>
-</form>
-
+<mat-vertical-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="nameForm">
+        <form class="name-form" [formGroup]="nameForm" #nameFormDirective="ngForm">
+            <ng-template matStepLabel>Name</ng-template>
+            <mat-form-field class="form-field">
+                <mat-label>Choose a name</mat-label>
+                <input matInput type="text" formControlName="name">
+                <mat-error>A name is required.</mat-error>
+            </mat-form-field>
+            <button class="stepper-button" mat-raised-button color="primary" matStepperNext>Next</button>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="subjectForm">
+        <ng-template matStepLabel>School subject</ng-template>
+        <form class="subject-form" [formGroup]="subjectForm" #subjectFormDirective="ngForm">
+            <mat-form-field class="form-field">
+                <mat-label>Choose a subject</mat-label>
+                <mat-select formControlName="subject">
+                    <mat-option [value]="'6042befc7008e500177cc04c'">Angular JS</mat-option>
+                </mat-select>
+                <mat-error>A subject is required</mat-error>
+            </mat-form-field>
+            <button class="stepper-button" mat-stroked-button color="primary" matStepperPrevious>Back</button>
+            <button class="stepper-button" mat-raised-button color="primary" matStepperNext>Next</button>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="submissionDateForm">
+        <form class="submission-date-form" [formGroup]="submissionDateForm" #submissionDateFormDirective="ngForm">
+            <ng-template matStepLabel>Submission date</ng-template>
+            <mat-form-field class="form-field">
+                <mat-label>Choose a submission date</mat-label>
+                <input matInput [min]="today" [matDatepicker]="picker" formControlName="submissionDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error>A submission date is required</mat-error>
+            </mat-form-field>
+            <button class="stepper-button" mat-stroked-button color="primary" matStepperPrevious>Back</button>
+            <button class="stepper-button" mat-raised-button color="primary" matStepperNext>Next</button>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="remarksForm">
+        <form class="remarks-form" [formGroup]="remarksForm" #remarksFormDirective="ngForm">
+            <ng-template matStepLabel>Remarks (optional)</ng-template>
+            <mat-form-field class="form-field remarks">
+                <mat-label>Add some remarks</mat-label>
+                <textarea matInput type="textarea" formControlName="remarks"></textarea>
+            </mat-form-field>
+            <button class="stepper-button" mat-stroked-button color="primary" matStepperPrevious>Back</button>
+            <button mat-raised-button
+                    color="primary"
+                    class="create-button"
+                    type="button"
+                    [disabled]="!nameForm.valid || !subjectForm.valid || !submissionDateForm.valid"
+                    (click)="createAssignment()">
+                Create assignment
+            </button>
+        </form>
+    </mat-step>
+</mat-vertical-stepper>

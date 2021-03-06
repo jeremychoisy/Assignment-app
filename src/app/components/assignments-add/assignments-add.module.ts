@@ -7,6 +7,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {MatStepperModule} from '@angular/material/stepper';
 import {AssignmentStoreModule} from '../../store/assignment/assignment.module';
 import {AssignmentsAddComponent} from './assignments-add.component';
 
@@ -21,7 +22,8 @@ import {AssignmentsAddComponent} from './assignments-add.component';
     MatSelectModule,
     MatOptionModule,
     MatButtonModule,
-    AssignmentStoreModule
+    AssignmentStoreModule,
+    MatStepperModule
   ],
   declarations: [AssignmentsAddComponent],
   exports: [AssignmentsAddComponent]
