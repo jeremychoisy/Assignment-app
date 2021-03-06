@@ -28,7 +28,16 @@
 
       <ng-container matColumnDef="Work">
         <th mat-header-cell *matHeaderCellDef> Work</th>
-        <td mat-cell *matCellDef="let item">Work</td>
+        <ng-container *ngIf="!doneStatus">
+          <td mat-cell *matCellDef="let item">
+            <span class="material-icons" aria-label="Upload icon">upload</span>
+          </td>
+        </ng-container>
+        <ng-container *ngIf="doneStatus">
+          <td mat-cell *matCellDef="let item">
+            <span class="material-icons" aria-label="Download icon">download</span>
+          </td>
+        </ng-container>
       </ng-container>
 
 

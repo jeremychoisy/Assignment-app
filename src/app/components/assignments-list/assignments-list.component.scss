@@ -1,12 +1,33 @@
 .on-going-assignments, .done-assignments {
   margin: 10rem 0;
 }
+
 table {
   width: 100%;
-  border: solid 1px;
+  border: dodgerblue solid 1px;
+  text-align-last: center;
+  border-spacing: 10px;
+  border-collapse: separate;
 }
 
-mat-row :hover {
-  background: lightblue;
+.mat-row:hover {
+  background: dodgerblue;
+}
+
+td {
+  padding: 10px !important;
+}
+
+th {
+  min-width: 6em;
+  margin-right: 6em;
+}
+
+tr {
+  white-space: nowrap;
+}
+
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+  padding-right: 0px;
 }
 

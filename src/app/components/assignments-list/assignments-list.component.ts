@@ -9,6 +9,7 @@ import {AssignmentApiService} from '../../services';
 import {
   AssignmentStore,
   loadAssignmentsFromApi,
+  resetAssignments,
   selectDoneAssignments,
   selectOnGoingAssignments,
   selectUser,
@@ -22,9 +23,9 @@ import {
 })
 export class AssignmentsListComponent implements OnInit {
   @Input()
-  public doneStatus?: boolean;
+  public doneStatus = false;
   @Input()
-  public currentSchoolSubjectId: string = '';
+  public currentSchoolSubjectId = '';
 
   public assignmentsList$: Observable<Assignment[]> | undefined;
   public displayedColumns$: Observable<string[]>;
@@ -37,24 +38,29 @@ export class AssignmentsListComponent implements OnInit {
       filter(userLevel => !!userLevel),
       map(userLevel => {
         if (userLevel === 'student') {
-          return this.doneStatus ? ['Name', 'Author', 'Score', 'Submission Date', 'Work'] : ['Name', 'Author', 'Work'];
+          return this.doneStatus ? ['Name', 'Score', 'Submission Date', 'Work'] : ['Name', 'Work'];
         } else {
-          return this.doneStatus ? ['Name', 'Author', 'Score', 'Work'] : ['Name', 'Author', 'Submission Date', 'Work'];
+          return this.doneStatus ? ['Name', 'Score', 'Work'] : ['Name', 'Submission Date', 'Work'];
         }
       })
     );
   }
 
   ngOnInit(): void {
+    this.store.dispatch(resetAssignments());
     this.loadAssignments();
   }
 
   private loadAssignments(): void {
     this.store.dispatch(loadAssignmentsFromApi({
-      call: this.assignmentApiService.getAssignments$(this.currentSchoolSubjectId, this.pageNumber),
+      call: this.assignmentApiService.getAssignments$(this.currentSchoolSubjectId, this.doneStatus, this.pageNumber),
       assignmentType: this.doneStatus ? 'done' : 'onGoing'
     }));
-    this.assignmentsList$ = this.store.pipe(select(this.doneStatus ? selectDoneAssignments : selectOnGoingAssignments));
+    this.assignmentsList$ = this.store.pipe(
+      select(this.doneStatus ? selectDoneAssignments : selectOnGoingAssignments),
+      map((assignments: Assignment[]) =>
+        assignments.filter(assignment => assignment.subject._id === this.currentSchoolSubjectId)
+      ));
   }
 
   onTableScroll({$event}: { $event: any }): void {
@@ -75,9 +81,6 @@ export class AssignmentsListComponent implements OnInit {
     switch (element) {
       case 'Name':
         return item.name || 'Unknown';
-      case 'Author' :
-        const author = item.author.name + ' ' + item.author.lastName;
-        return author || 'Unknown';
       case 'Score':
         return item.score?.toString() || 'No scored';
       case 'Submission Date':

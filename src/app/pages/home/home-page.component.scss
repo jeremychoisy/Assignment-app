@@ -9,7 +9,11 @@
   padding: 1em;
 }
 
-.mat-tab-group {
-  width: 80%;
+.tab-group {
   align-items: center;
+  width: 100%;
+}
+
+:host ::ng-deep .mat-tab-body-wrapper {
+  width: 100%;
 }

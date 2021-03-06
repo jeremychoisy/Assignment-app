@@ -11,9 +11,9 @@ export class AssignmentApiService {
   constructor(private httpClientWrapperService: HttpClientWrapperService) {
   }
 
-  public getAssignments$(subjectId: string, pageNumber?: number): Observable<GetAssignmentsReply> {
+  public getAssignments$(subjectId: string, isDone: boolean, pageNumber?: number): Observable<GetAssignmentsReply> {
     if (pageNumber !== undefined) {
-      return this.httpClientWrapperService.get<GetAssignmentsReply>(apiConfig.baseUrl + '/assignment?subjectId=' + subjectId + '&page=' + pageNumber + '&pageSize=20');
+      return this.httpClientWrapperService.get<GetAssignmentsReply>(apiConfig.baseUrl + '/assignment?subjectId=' + subjectId + '&page=' + pageNumber + '&pageSize=20&isDone=' + isDone);
     } else {
       return this.httpClientWrapperService.get<GetAssignmentsReply>(apiConfig.baseUrl + '/assignment');
     }

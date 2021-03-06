@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {of} from 'rxjs';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 import {pushMessage} from '../message/index';
 import {createAssignmentFromApi, loadAssignmentsFromApi, setAssignments, setAssignmentsLoadingStatus} from './assignment.actions';
 
@@ -13,7 +13,7 @@ export class AssignmentEffects {
   loadAssignmentsFromApi$ = createEffect(() =>
       this.actions$.pipe(
           ofType(loadAssignmentsFromApi),
-          switchMap(action =>
+          mergeMap(action =>
               action.call.pipe(
                   map((getAssignmentsReply) => setAssignments({getAssignmentsReply, assignmentType: action.assignmentType})),
                   catchError((err) => of(pushMessage({message: {type: 'error', content: `Something went wrong while fetching the assignments (error code :${err.status})`}})))
