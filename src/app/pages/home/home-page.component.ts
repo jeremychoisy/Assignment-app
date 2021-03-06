@@ -13,7 +13,7 @@ export class HomePageComponent implements OnInit {
   listSchoolSubject: SchoolSubject[] = [];
 
   constructor(private userApiService: UserApiService, private router: Router) {
-    // Todo recup list of school subject by user name
+    // Todo recup list of school school-subject by user name
   }
 
   ngOnInit(): void {

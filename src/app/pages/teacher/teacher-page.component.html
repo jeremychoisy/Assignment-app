@@ -1,0 +1,45 @@
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Assignments">
+        <ng-template matTabContent>
+            <mat-tab-group mat-align-tabs="center" (selectedTabChange)="onSelectedTabChange()">
+                <mat-tab label="Create">
+                    <ng-template matTabContent>
+                        <app-assignments-add></app-assignments-add>
+                    </ng-template>
+                </mat-tab>
+                <mat-tab label="Edit">
+                    <ng-template matTabContent>
+                        Edit-delete-component
+                    </ng-template>
+                </mat-tab>
+            </mat-tab-group>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Subjects">
+        <ng-template matTabContent>
+            <mat-tab-group mat-align-tabs="center" (selectedTabChange)="onSelectedTabChange()">
+                <mat-tab label="Create">
+                    <ng-template matTabContent>
+                        <app-school-subjects-add></app-school-subjects-add>
+                    </ng-template>
+                </mat-tab>
+                <mat-tab label="Edit">
+                    <ng-template matTabContent>
+                        Edit-delete-component
+                    </ng-template>
+                </mat-tab>
+            </mat-tab-group>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Students">
+        <ng-template matTabContent>
+            <mat-tab-group *ngIf="user$ | async as user" mat-align-tabs="center" (selectedTabChange)="onSelectedTabChange()">
+                <mat-tab *ngFor="let subject of user.subjects" [label]="subject.name">
+                    <ng-template matTabContent>
+                        <app-student-list-by-school-subject *ngIf="subject._id as subjectId" [subjectId]="subjectId"></app-student-list-by-school-subject>
+                    </ng-template>
+                </mat-tab>
+            </mat-tab-group>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

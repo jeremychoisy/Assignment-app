@@ -1,4 +1,4 @@
-import {User} from '../data/index';
+import {User} from '../../data';
 
 export interface LogInReply {
   user: User;

@@ -1,4 +1,4 @@
-import {Assignment} from '../data';
+import {Assignment} from '../../data';
 
 export interface GetAssignmentsReply {
     assignments: Assignment[];

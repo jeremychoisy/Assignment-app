@@ -25,5 +25,3 @@ export const selectCurrentAssignment = createSelector(
 );
 export const selectOnGoingAssignmentsLoadingStatus = createSelector(selectOnGoingAssignmentState, (state) => state.isLoading);
 export const selectDoneAssignmentsLoadingStatus = createSelector(selectDoneAssignmentState, (state) => state.isLoading);
-export const selectOnGoingAssignmentsFailureStatus = createSelector(selectOnGoingAssignmentState, (state) => state.failureStatus);
-export const selectDoneAssignmentsFailureStatus = createSelector(selectDoneAssignmentState, (state) => state.failureStatus);

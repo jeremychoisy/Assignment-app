@@ -1,11 +1,18 @@
 <mat-toolbar class="toolbar" color="primary">
   <div class="left-section">
-  <button mat-icon-button class="home-icon" aria-label="home icon" [routerLink]="'/home'">
+  <button mat-icon-button class="home-icon" aria-label="home icon" (click)="navigateToHomePage()">
     <mat-icon>home</mat-icon>
   </button>
   <span>Assignment Application</span>
   </div>
   <div class="right-section">
+    <button *ngIf="isTeacherLogged$ | async"
+            mat-icon-button
+            class="manage-icon"
+            aria-label="manage icon"
+            (click)="navigateToTeacherPage()">
+      <mat-icon>manage_accounts</mat-icon>
+    </button>
     <button *ngIf="isUserLogged$ | async"
             mat-icon-button
             class="logout-icon"

@@ -1,5 +1,5 @@
 <div class="file-input-container">
-  <button mat-raised-button (click)="openInput()">
+  <button type="button" mat-raised-button (click)="openInput()">
     <span [innerHTML]="buttonLabel || 'Select a file to upload'"></span>
   </button>
   <input #inputFile hidden class="file-input" type="file" (change)="onChange($event)">

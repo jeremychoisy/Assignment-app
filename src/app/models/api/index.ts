@@ -1,2 +1,3 @@
-export * from './get-assignments-reply';
-export * from './log-in-reply';
+export * from './assignment/index';
+export * from './school-subject/index';
+export * from './user/index';

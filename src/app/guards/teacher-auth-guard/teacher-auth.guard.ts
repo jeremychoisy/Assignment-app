@@ -5,11 +5,12 @@ import {Observable} from 'rxjs';
 import {map, skipWhile, take} from 'rxjs/operators';
 import {RoutesEnum} from '../../config/index';
 import {selectUserState, UserStore} from '../../store';
+import {UserLevel} from '../../models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class TeacherAuthGuard implements CanActivate {
 
   constructor(private store: Store<UserStore>, private router: Router) {
   }
@@ -19,7 +20,7 @@ export class AuthGuard implements CanActivate {
       select(selectUserState),
       skipWhile(userState => userState.isLoading),
       take(1),
-      map(userState =>  userState.user ? true : this.router.parseUrl(RoutesEnum.login)),
+      map(userState =>  userState.user?.userLevel === UserLevel.teacher ? true : this.router.parseUrl(RoutesEnum.home)),
     );
   }
 }

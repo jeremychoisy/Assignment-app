@@ -8,9 +8,10 @@ import * as AssignmentActions from './assignment.actions';
 export const adapter: EntityAdapter<Assignment> = createEntityAdapter<Assignment>({selectId: model => model._id || ''});
 
 export const initialState: AssignmentState = {
-  onGoingAssignments: adapter.getInitialState({isLoading: false}),
-  doneAssignments: adapter.getInitialState({isLoading: false}),
-  selectedAssignmentId: null
+  onGoingAssignments: adapter.getInitialState({isLoading: false, totalCount: 0}),
+  doneAssignments: adapter.getInitialState({isLoading: false, totalCount: 0}),
+  selectedAssignmentId: null,
+  isLoading: false
 };
 
 export const reducer = createReducer(
@@ -20,9 +21,9 @@ export const reducer = createReducer(
     ({
       ...state,
       ...(action.assignmentType === 'onGoing' ?
-        {onGoingAssignments: adapter.addMany(action.assignments, {...state.onGoingAssignments, isLoading: false})}
+        {onGoingAssignments: adapter.addMany(action.getAssignmentsReply.assignments, {...state.onGoingAssignments, isLoading: false, totalCount: action.getAssignmentsReply.totalCount})}
         :
-        {doneAssignments: adapter.addMany(action.assignments, {...state.doneAssignments, isLoading: false}), isLoading: false}
+        {doneAssignments: adapter.addMany(action.getAssignmentsReply.assignments, {...state.doneAssignments, isLoading: false}), isLoading: false, totalCount: action.getAssignmentsReply.totalCount}
         )
     })
   ),
@@ -37,10 +38,13 @@ export const reducer = createReducer(
         )
       })
   ),
+  on(AssignmentActions.createAssignmentFromApi,
+      (state) => ({...state, isLoading: true})
+  ),
   on(AssignmentActions.selectAssignment,
     (state, action) => ({...state, selectedAssignmentId: action.assignmentId})
   ),
-  on(AssignmentActions.setAssignmentsFailureStatus,
-    (state, action) => ({...state, isLoading: false, failureStatus: action.status})
+  on(AssignmentActions.setAssignmentsLoadingStatus,
+    (state, action) => ({...state, isLoading: action.status})
   )
 );

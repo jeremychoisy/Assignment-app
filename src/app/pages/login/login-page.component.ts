@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
-import {RoutesEnum} from '../../models/enums/index';
+import {RoutesEnum} from '../../config/enums/index';
 import {UserApiService} from '../../services/index';
 import {logInUserFromApi, UserStore} from '../../store';
+import {clearMessages, MessageStore} from '../../store/message';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private userApiService: UserApiService,
-    private store: Store<UserStore>) {
+    private store: Store<UserStore & MessageStore>) {
   }
 
   ngOnInit(): void {
@@ -33,24 +34,25 @@ export class LoginPageComponent implements OnInit {
 
   getAccountError(): string {
     if (this.formGroup.get('account')?.hasError('required')) {
-      return 'Une adresse mail est nécessaire';
+      return 'An email address is required';
     }
-    return this.formGroup.get('account')?.hasError('email') ? 'L\'adresse e-mail doit être renseignée' : '';
+    return this.formGroup.get('account')?.hasError('email') ? 'This email address is invalid'  : '';
   }
 
   getPasswordError(): string {
-    return this.formGroup.get('password')?.hasError('required') ? 'Un mot de passe est nécessaire' : '';
+    return this.formGroup.get('password')?.hasError('required') ? 'A password is required' : '';
   }
 
   logAccount(): void {
+    this.store.dispatch(clearMessages());
     const account = this.formGroup.get('account')?.value;
     const password = this.formGroup.get('password')?.value;
 
     if (password && account) {
       this.store.dispatch(logInUserFromApi({
-        call: this.userApiService.logIn(account, password)
+        call: this.userApiService.logIn$(account, password)
       }));
-      this.router.navigateByUrl(RoutesEnum.home);
+      this.router.navigateByUrl('/' + RoutesEnum.home);
     }
   }
 }

@@ -2,35 +2,24 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
-import {RouterModule, Routes} from '@angular/router';
-import {UserStoreModule} from '../../store/user/user.module';
-import {LoginPageComponent} from './login-page.component';
 import {MessageStoreModule} from '../../store/message/message.module';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: LoginPageComponent
-  }
-];
+import {FileInputModule} from '../file-input/file-input.module';
+import {SchoolSubjectsAddComponent} from './school-subjects-add.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
-    UserStoreModule, MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatIconModule,
     MatInputModule,
     MatButtonModule,
+    FileInputModule,
     MessageStoreModule
   ],
-  declarations: [LoginPageComponent],
+  declarations: [SchoolSubjectsAddComponent],
+  exports: [SchoolSubjectsAddComponent]
 })
-export class LoginPageModule {
+export class SchoolSubjectsAddModule {
 }

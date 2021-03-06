@@ -26,11 +26,11 @@ export class AssignmentsListComponent implements OnInit {
 
   private loadAssignments(): void {
     this.store.dispatch(loadAssignmentsFromApi({
-      call: this.assignmentApiService.getAssignments(),
+      call: this.assignmentApiService.getAssignments$(),
       assignmentType: 'done'
     }));
     // this.store.dispatch(loadAssignmentsFromApi({
-    //   call: this.assignmentApiService.getAssignments(),
+    //   call: this.assignmentApiService.getAssignments$(),
     //   assignmentType: 'onGoing'
     // }));
   }

@@ -18,7 +18,7 @@ export class FileInputComponent implements OnInit, OnDestroy {
   public buttonLabel?: string;
 
   @Output()
-  public receivedUrlEmitter: EventEmitter<string | null> = new EventEmitter<string | null>();
+  public receivedUrlEmitter: EventEmitter<string | undefined> = new EventEmitter<string | undefined>();
 
   @ViewChild('inputFile', {static: false})
   inputRef?: ElementRef;
@@ -50,15 +50,15 @@ export class FileInputComponent implements OnInit, OnDestroy {
           ).subscribe((hasFailed: boolean | null) => {
             // Since AWS S3 API response is null when everything went well, the return here is truthy if something failed
             if (hasFailed) {
-              this.receivedUrlEmitter.emit(this.receivedUrl);
-            } else {
-              this.receivedUrlEmitter.emit(null);
+              this.receivedUrlEmitter.emit(undefined);
               this.store.dispatch(pushMessage({
                 message: {
                   type: 'error',
                   content: 'File could not be uploaded, please try again later.'
                 }
               }));
+            } else {
+              this.receivedUrlEmitter.emit(this.receivedUrl);
             }
           });
         }

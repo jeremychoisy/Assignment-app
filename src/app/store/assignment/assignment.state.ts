@@ -3,13 +3,14 @@ import {Assignment} from '../../models/index';
 
 export interface AssignmentEntitiesState extends EntityState<Assignment> {
   isLoading: boolean;
-  failureStatus?: number;
+  totalCount: number;
 }
 
 export interface AssignmentState {
   onGoingAssignments: AssignmentEntitiesState;
   doneAssignments: AssignmentEntitiesState;
   selectedAssignmentId: string | null;
+  isLoading: boolean;
 }
 
 export const ASSIGNMENT_STORE_NAME = 'assignment';

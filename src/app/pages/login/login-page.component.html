@@ -1,9 +1,9 @@
 <mat-card class="horizontalCard">
 
   <mat-card-header>
-    <mat-card-title>Connexion</mat-card-title>
+    <mat-card-title>Login</mat-card-title>
     <mat-card-subtitle>
-      <span class="ask-for-access-label">Si vous n'avez pas de compte, demander un accès <a href="mailto: admin@gmail.com">ici</a></span>
+      <span class="ask-for-access-label">If you don't have any account, you can request an access <a href="mailto: admin@gmail.com">here</a></span>
     </mat-card-subtitle>
   </mat-card-header>
 
@@ -11,7 +11,7 @@
     <form [formGroup]="formGroup" (ngSubmit)="logAccount()" class="form">
       <div>
         <mat-form-field appearance="outline">
-          <mat-label>Adresse e-mail</mat-label>
+          <mat-label>Enter your email address</mat-label>
           <input matInput formControlName="account">
           <mat-error
             *ngIf="formGroup.controls['account'].invalid && formGroup.controls['account'].touched">{{getAccountError()}}</mat-error>
@@ -21,7 +21,7 @@
 
       <div>
         <mat-form-field appearance="outline">
-          <mat-label>Saisissez votre mot de passe</mat-label>
+          <mat-label>Enter your password</mat-label>
           <input matInput [type]="isPasswordHidden ? 'password' : 'text'" formControlName="password">
           <mat-error
             *ngIf="formGroup.controls['password'].invalid && formGroup.controls['password'].touched">{{getPasswordError()}}</mat-error>

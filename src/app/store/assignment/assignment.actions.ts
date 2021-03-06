@@ -1,10 +1,15 @@
 import {createAction, props} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {Assignment, AssignmentType} from '../../models/index';
+import {AssignmentType, CreateAssignmentReply, GetAssignmentsReply} from '../../models/index';
 
 export const loadAssignmentsFromApi = createAction(
   '[Assignment/API] load assignments from API for logged user',
-  props<{ call: Observable<Assignment[]>, assignmentType: AssignmentType}>()
+  props<{ call: Observable<GetAssignmentsReply>, assignmentType: AssignmentType}>()
+);
+
+export const createAssignmentFromApi = createAction(
+    '[Assignment/API] create assignment from API',
+    props<{call: Observable<CreateAssignmentReply>}>()
 );
 
 export const selectAssignment = createAction(
@@ -14,10 +19,10 @@ export const selectAssignment = createAction(
 
 export const setAssignments = createAction(
   '[Assignment] set assignments',
-  props<{ assignments: Assignment[], assignmentType: AssignmentType }>()
+  props<{ getAssignmentsReply: GetAssignmentsReply, assignmentType: AssignmentType }>()
 );
 
-export const setAssignmentsFailureStatus = createAction(
-  '[Assignment] set assignments store failure status',
-  props<{ status: number }>()
+export const setAssignmentsLoadingStatus = createAction(
+  '[Assignment] set assignments store loading status',
+  props<{ status: boolean }>()
 );

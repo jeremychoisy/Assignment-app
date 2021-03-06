@@ -1,0 +1,15 @@
+<form [formGroup]="subjectForm" (ngSubmit)="createSubject()" class="create-subject-form" #formDirective="ngForm">
+    <mat-form-field class="form-field">
+        <mat-label>Choose a name</mat-label>
+        <input matInput type="text" formControlName="name">
+        <mat-error>A name is required.</mat-error>
+    </mat-form-field>
+    <app-file-input
+            class="form-field"
+            [submitTrigger$]="submitTrigger$"
+            [buttonLabel]="'Choose a picture to upload'"
+            (receivedUrlEmitter)="onUrlReceived($event)">
+    </app-file-input>
+    <button mat-raised-button color="primary" class="create-button" type="submit" [disabled]="!subjectForm.valid">Create assignment</button>
+</form>
+

@@ -13,7 +13,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MessagePanelModule} from './components/message-panel/message-panel.module';
 import {AppLayoutModule} from './layout/app-layout/app-layout.module';
-import {MessageStoreModule} from './store/message/message.module';
 import {UserStoreModule} from './store/user/user.module';
 
 @NgModule({
@@ -24,7 +23,6 @@ import {UserStoreModule} from './store/user/user.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MessageStoreModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     ...!environment.production ? [StoreDevtoolsModule.instrument({maxAge: 25})] : [],
