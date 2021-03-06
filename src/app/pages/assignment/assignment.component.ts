@@ -16,11 +16,10 @@ export class AssignmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sub = this.route.params.subscribe(params => {
+    /*this.sub = this.route.params.subscribe(params => {
       this.getAssignmentById(params.id);
       // In a real app: dispatch action to load the details here.
-    });
-
+    });*/
   }
 
   getAssignmentById(id: string): void {

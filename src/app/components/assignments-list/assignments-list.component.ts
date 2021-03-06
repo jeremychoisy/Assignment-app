@@ -1,10 +1,19 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {Component, OnInit} from '@angular/core';
+import {DatePipe} from '@angular/common';
+import {Component, Input, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {Assignment} from '../../models/index';
-import {AssignmentApiService} from '../../services/index';
-import {AssignmentStore, loadAssignmentsFromApi, selectDoneAssignments, selectOnGoingAssignments} from '../../store/index';
+import {filter, map} from 'rxjs/operators';
+import {Assignment, UserLevel} from '../../models';
+import {AssignmentApiService} from '../../services';
+import {
+  AssignmentStore,
+  loadAssignmentsFromApi,
+  selectDoneAssignments,
+  selectOnGoingAssignments,
+  selectUser,
+  UserStore
+} from '../../store';
 
 @Component({
   selector: 'app-assignments-list',
@@ -12,27 +21,71 @@ import {AssignmentStore, loadAssignmentsFromApi, selectDoneAssignments, selectOn
   styleUrls: ['./assignments-list.component.scss']
 })
 export class AssignmentsListComponent implements OnInit {
-  public doneAssignments: Assignment[] = [];
-  public onGoingAssignments: Assignment[] = [];
+  @Input()
+  public doneStatus?: boolean;
+  @Input()
+  public currentSchoolSubjectId: string = '';
 
-  constructor(private store: Store<AssignmentStore>, private assignmentApiService: AssignmentApiService) {
+  public assignmentsList$: Observable<Assignment[]> | undefined;
+  public displayedColumns$: Observable<string[]>;
+  public userLevel$: Observable<UserLevel | undefined>;
+  public pageNumber = 1;
+
+  constructor(private assignmentApiService: AssignmentApiService, private store: Store<AssignmentStore & UserStore>, private datePipe: DatePipe) {
+    this.userLevel$ = this.store.pipe(select(selectUser), map(user => user?.userLevel));
+    this.displayedColumns$ = this.userLevel$.pipe(
+      filter(userLevel => !!userLevel),
+      map(userLevel => {
+        if (userLevel === 'student') {
+          return this.doneStatus ? ['Name', 'Author', 'Score', 'Submission Date', 'Work'] : ['Name', 'Author', 'Work'];
+        } else {
+          return this.doneStatus ? ['Name', 'Author', 'Score', 'Work'] : ['Name', 'Author', 'Submission Date', 'Work'];
+        }
+      })
+    );
+  }
+
+  ngOnInit(): void {
     this.loadAssignments();
-    this.store.pipe(select(selectDoneAssignments)).subscribe((assignments) => {
-      console.log('init');
-      this.doneAssignments = [...assignments, ...assignments, ...assignments, ...assignments];
-      this.onGoingAssignments = [...assignments, ...assignments, ...assignments, ...assignments];
-    });
   }
 
   private loadAssignments(): void {
     this.store.dispatch(loadAssignmentsFromApi({
-      call: this.assignmentApiService.getAssignments$(),
-      assignmentType: 'done'
+      call: this.assignmentApiService.getAssignments$(this.currentSchoolSubjectId, this.pageNumber),
+      assignmentType: this.doneStatus ? 'done' : 'onGoing'
     }));
-    // this.store.dispatch(loadAssignmentsFromApi({
-    //   call: this.assignmentApiService.getAssignments$(),
-    //   assignmentType: 'onGoing'
-    // }));
+    this.assignmentsList$ = this.store.pipe(select(this.doneStatus ? selectDoneAssignments : selectOnGoingAssignments));
+  }
+
+  onTableScroll({$event}: { $event: any }): void {
+    console.log('In Scroll event');
+    const tableViewHeight = $event.target.offsetHeight;
+    const tableScrollHeight = $event.target.scrollHeight;
+    const scrollLocation = $event.target.scrollTop;
+
+    const limit = tableScrollHeight - tableViewHeight - 200;
+    if (scrollLocation > limit) {
+      this.loadAssignments();
+      this.pageNumber++;
+    }
+  }
+
+  getCellValue(item: Assignment, element: string): string {
+
+    switch (element) {
+      case 'Name':
+        return item.name || 'Unknown';
+      case 'Author' :
+        const author = item.author.name + ' ' + item.author.lastName;
+        return author || 'Unknown';
+      case 'Score':
+        return item.score?.toString() || 'No scored';
+      case 'Submission Date':
+        const date = this.datePipe.transform(item.submissionDate, 'dd-MM-yyyy');
+        return date?.toString() || 'No date';
+      default:
+        return '';
+    }
   }
 
   public drop(event: CdkDragDrop<Assignment[]>): void {
@@ -44,9 +97,6 @@ export class AssignmentsListComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
-  }
-
-  ngOnInit(): void {
   }
 
 }

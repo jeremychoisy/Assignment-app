@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {select, Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {SchoolSubject} from '../../models';
-import {UserApiService} from '../../services';
+import {selectUser, UserStore} from '../../store';
 
 @Component({
   selector: 'app-home',
@@ -10,18 +12,13 @@ import {UserApiService} from '../../services';
 })
 export class HomePageComponent implements OnInit {
 
-  listSchoolSubject: SchoolSubject[] = [];
+  listSchoolSubject$: Observable<SchoolSubject[] | undefined>;
 
-  constructor(private userApiService: UserApiService, private router: Router) {
-    // Todo recup list of school school-subject by user name
+  constructor(store: Store<UserStore>) {
+    this.listSchoolSubject$ = store.pipe(select(selectUser), map(user => user?.subjects));
   }
 
   ngOnInit(): void {
-  }
-
-  logout(): void {
-    /* todo disconnect from api*/
-    this.router.navigateByUrl('/login');
   }
 }
 

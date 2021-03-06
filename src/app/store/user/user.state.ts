@@ -1,4 +1,4 @@
-import {User} from '../../models/index';
+import {User} from '../../models';
 
 export interface UserState {
   user: User | null;

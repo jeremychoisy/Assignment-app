@@ -1,5 +1,13 @@
 <div class="schoolSubjectContainer">
-  <ng-container *ngFor="let schoolSubject of listSchoolSubject">
-    <app-school-subject [currentSchoolSubject]="schoolSubject"></app-school-subject>
-  </ng-container>
+  <mat-tab-group>
+    <ng-container *ngFor="let schoolSubject of listSchoolSubject$ | async">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <img class="schoolSubject-tab-icon" src="{{schoolSubject.subjectPictureUrl}}" alt="Icon of school subject">
+          <span>{{schoolSubject.name}}</span>
+        </ng-template>
+        <app-school-subject [currentSchoolSubject]="schoolSubject"></app-school-subject>
+      </mat-tab>
+    </ng-container>
+  </mat-tab-group>
 </div>
