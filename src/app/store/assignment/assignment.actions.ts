@@ -22,6 +22,10 @@ export const setAssignments = createAction(
   props<{ getAssignmentsReply: GetAssignmentsReply, assignmentType: AssignmentType }>()
 );
 
+export const resetAssignments = createAction(
+  '[Assignment] reset assignments store'
+);
+
 export const setAssignmentsLoadingStatus = createAction(
   '[Assignment] set assignments store loading status',
   props<{ status: boolean }>()

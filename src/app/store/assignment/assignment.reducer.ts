@@ -47,4 +47,8 @@ export const reducer = createReducer(
   on(AssignmentActions.setAssignmentsLoadingStatus,
     (state, action) => ({...state, isLoading: action.status})
   )
+  ,
+  on(AssignmentActions.resetAssignments,
+    () => ({...initialState})
+  )
 );

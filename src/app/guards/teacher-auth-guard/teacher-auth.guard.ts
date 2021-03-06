@@ -4,8 +4,8 @@ import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {map, skipWhile, take} from 'rxjs/operators';
 import {RoutesEnum} from '../../config/index';
-import {selectUserState, UserStore} from '../../store';
-import {UserLevel} from '../../models';
+import {UserLevel} from '../../models/index';
+import {selectUserState, UserStore} from '../../store/index';
 
 @Injectable({
   providedIn: 'root'
