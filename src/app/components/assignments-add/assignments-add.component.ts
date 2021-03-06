@@ -1,9 +1,11 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {MatVerticalStepper} from '@angular/material/stepper';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
+import {SchoolSubject} from '../../models';
 import {AssignmentApiService} from '../../services/index';
-import {AssignmentStore, clearMessages, createAssignmentFromApi} from '../../store/index';
+import {AssignmentStore, clearMessages, createAssignmentFromApi, selectAssignmentsStoreLoadingStatus} from '../../store/index';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -11,7 +13,12 @@ import {AssignmentStore, clearMessages, createAssignmentFromApi} from '../../sto
   templateUrl: './assignments-add.component.html',
   styleUrls: ['./assignments-add.component.scss']
 })
-export class AssignmentsAddComponent {
+export class AssignmentsAddComponent implements OnInit {
+  @Input()
+  public subjects: SchoolSubject[] = [];
+
+  public isLoading$: Observable<boolean>;
+
   public nameForm: FormGroup;
   public subjectForm: FormGroup;
   public submissionDateForm: FormGroup;
@@ -47,6 +54,7 @@ export class AssignmentsAddComponent {
     this.remarksForm = new FormGroup({
       remarks: new FormControl('')
     });
+    this.isLoading$ = this.store.pipe(select(selectAssignmentsStoreLoadingStatus));
   }
 
   private resetForms(): void {
@@ -58,6 +66,13 @@ export class AssignmentsAddComponent {
     this.submissionDateFormDirective?.resetForm();
     this.remarksForm.reset();
     this.stepper?.reset();
+  }
+
+  ngOnInit(): void {
+    const subjectFormControl = this.subjectForm.get('subject');
+    if (subjectFormControl && this.subjects[0]?._id) {
+      subjectFormControl.setValue(this.subjects[0]._id);
+    }
   }
 
   public async createAssignment(): Promise<void> {

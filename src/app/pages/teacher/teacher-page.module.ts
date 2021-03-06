@@ -10,6 +10,8 @@ import {UserStoreModule} from '../../store/user/user.module';
 import {TeacherPageComponent} from './teacher-page.component';
 import {MessageStoreModule} from '../../store/message/message.module';
 import {StudentListBySchoolSubjectModule} from '../../components/student-list-by-school-subject/student-list-by-school-subject.module';
+import {RootAssignmentsListModule} from '../../components/root-assignments-list/root-assignments-list.module';
+import {SchoolSubjectListModule} from '../../components/school-subject-list/school-subject-list.module';
 
 const routes: Routes = [
   {
@@ -29,7 +31,9 @@ const routes: Routes = [
     TeacherAuthGuardModule,
     UserStoreModule,
     MessageStoreModule,
-    StudentListBySchoolSubjectModule
+    StudentListBySchoolSubjectModule,
+    RootAssignmentsListModule,
+    SchoolSubjectListModule
   ],
   declarations: [TeacherPageComponent],
 })

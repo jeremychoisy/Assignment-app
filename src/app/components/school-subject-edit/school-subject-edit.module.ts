@@ -4,24 +4,20 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {MessageStoreModule} from '../../store/message/message.module';
 import {FileInputModule} from '../file-input/file-input.module';
-import {SchoolSubjectsAddComponent} from './school-subjects-add.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {SchoolSubjectEditComponent} from './school-subject-edit.component';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule,
     MatButtonModule,
+    MatInputModule,
     FileInputModule,
-    MessageStoreModule,
-    MatProgressSpinnerModule
   ],
-  declarations: [SchoolSubjectsAddComponent],
-  exports: [SchoolSubjectsAddComponent]
+  declarations: [SchoolSubjectEditComponent],
+  exports: [SchoolSubjectEditComponent]
 })
-export class SchoolSubjectsAddModule {
+export class SchoolSubjectEditModule {
 }

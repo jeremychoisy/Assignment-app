@@ -2,7 +2,7 @@ import {MongoEntity} from './mongo-entity';
 import {SchoolSubject} from './school-subject';
 import {User} from './user';
 
-export type AssignmentType = 'done' | 'onGoing';
+export type AssignmentType = 'done' | 'onGoing' | 'root';
 
 export interface Assignment extends MongoEntity {
   name: string;
@@ -12,4 +12,5 @@ export interface Assignment extends MongoEntity {
   creationDate?: Date;
   submissionDate?: Date;
   isSubmitted: boolean;
+  remarks?: string;
 }

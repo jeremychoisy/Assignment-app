@@ -19,4 +19,17 @@ export class SchoolSubjectApiService {
         }
         return this.httpClientWrapperService.post<CreateSchoolSubjectReply>(apiConfig.baseUrl + '/subject', formData);
     }
+
+    public updateSubject$(subjectId: string, name: string, subjectPictureUrl?: string): Observable<CreateSchoolSubjectReply> {
+        const formData = new FormData();
+        formData.append('name', name);
+        if (subjectPictureUrl) {
+            formData.append('subjectPictureUrl', subjectPictureUrl);
+        }
+        return this.httpClientWrapperService.patch<CreateSchoolSubjectReply>(apiConfig.baseUrl + '/subject/' + subjectId, formData);
+    }
+
+    public deleteSubject$(subjectId: string): Observable<any> {
+        return this.httpClientWrapperService.delete<any>(apiConfig.baseUrl + '/subject/' + subjectId);
+    }
 }

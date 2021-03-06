@@ -23,7 +23,7 @@ export class FileInputComponent implements OnInit, OnDestroy {
   @ViewChild('inputFile', {static: false})
   inputRef?: ElementRef;
 
-  private selectedFile?: File;
+  public selectedFile?: File;
   private receivedUrl?: string;
 
   private subscriptions: Subscription[] = [];
@@ -60,7 +60,11 @@ export class FileInputComponent implements OnInit, OnDestroy {
             } else {
               this.receivedUrlEmitter.emit(this.receivedUrl);
             }
+            this.selectedFile = undefined;
           });
+        } else {
+          this.receivedUrlEmitter.emit(undefined);
+          this.selectedFile = undefined;
         }
       })
     );

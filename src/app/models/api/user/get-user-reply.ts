@@ -1,6 +1,5 @@
 import {User} from '../../data/index';
 
-export interface LogInReply {
+export interface GetUserReply {
   user: User;
-  token: string;
 }

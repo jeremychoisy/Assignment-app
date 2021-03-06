@@ -10,6 +10,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {AssignmentStoreModule} from '../../store/assignment/assignment.module';
 import {AssignmentsAddComponent} from './assignments-add.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {AssignmentsAddComponent} from './assignments-add.component';
     MatOptionModule,
     MatButtonModule,
     AssignmentStoreModule,
-    MatStepperModule
+    MatStepperModule,
+    MatProgressSpinnerModule
   ],
   declarations: [AssignmentsAddComponent],
   exports: [AssignmentsAddComponent]

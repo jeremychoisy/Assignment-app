@@ -1,6 +1,6 @@
 import {createAction, props} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {AssignmentType, CreateAssignmentReply, GetAssignmentsReply} from '../../models/index';
+import {AssignmentType, CreateAssignmentReply, GetAssignmentsReply, UpdateAssignmentReply} from '../../models/index';
 
 export const loadAssignmentsFromApi = createAction(
   '[Assignment/API] load assignments from API for logged user',
@@ -10,6 +10,16 @@ export const loadAssignmentsFromApi = createAction(
 export const createAssignmentFromApi = createAction(
     '[Assignment/API] create assignment from API',
     props<{call: Observable<CreateAssignmentReply>}>()
+);
+
+export const deleteAssignmentFromApi = createAction(
+  '[Assignment/API] delete assignment from API',
+  props<{call: Observable<any>}>()
+);
+
+export const updateAssignmentFromApi = createAction(
+  '[Assignment/API] update assignment from API',
+  props<{call: Observable<UpdateAssignmentReply>}>()
 );
 
 export const selectAssignment = createAction(

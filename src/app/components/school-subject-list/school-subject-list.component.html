@@ -1,0 +1,31 @@
+<div class="loading-shade-container mat-elevation-z8">
+  <div class="loading-shade" *ngIf="isLoading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <ng-container *ngIf="subject$ | async as subject">
+    <div class="table-container">
+      <table *ngIf="subject.length;else noSubject" mat-table [dataSource]="subject" class="table">
+        <ng-container matColumnDef="picture" [sticky]=true>
+          <th mat-header-cell *matHeaderCellDef>Picture</th>
+          <td mat-cell *matCellDef="let row">
+            <img *ngIf="row.subjectPictureUrl" class="subject-picture" [src]="row.subjectPictureUrl" alt="subject picture">
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name" [sticky]=true>
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let row">{{row.name}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></tr>
+      </table>
+    </div>
+  </ng-container>
+</div>
+<ng-template #noSubject>
+  <div class="no-subject" *ngIf="!(isLoading$ | async)">
+    <span>No subjects to display</span>
+  </div>
+</ng-template>

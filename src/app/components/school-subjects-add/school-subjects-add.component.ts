@@ -16,8 +16,11 @@ export class SchoolSubjectsAddComponent {
 
   private avatarUrl$: Subject<string | undefined> = new Subject<string | undefined>();
 
-  private submitTriggerSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private submitTriggerSubject$: Subject<boolean> = new Subject<boolean>();
   public submitTrigger$: Observable<boolean> = this.submitTriggerSubject$.asObservable();
+
+  public isLoadingSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isLoading$: Observable<boolean> = this.isLoadingSubject$.asObservable();
 
   @ViewChild('formDirective', {static: false})
   private formDirective?: NgForm;
@@ -33,19 +36,17 @@ export class SchoolSubjectsAddComponent {
   }
 
   public createSubject(): void {
-    console.log('IN');
-    // TODO: IS PENDING TRUE
+    this.isLoadingSubject$.next(true);
     this.store.dispatch(clearMessages());
     const name = this.subjectForm.get('name')?.value;
-    this.submitTriggerSubject$.next(true);
     this.avatarUrl$.pipe(
       take(1)
     ).subscribe((avatarUrl) => {
       this.schoolSubjectApiService.createSubject$(name, avatarUrl).pipe(
         take(1),
         catchError((err) => of(err.status))
-      ).subscribe((res) => {
-        // TODO: IS PENDING FALSE
+      ).subscribe((res: any) => {
+        this.isLoadingSubject$.next(false);
         if (res.subject) {
           this.store.dispatch(pushMessage({message: {type: 'success', content: `The subject '${res.subject.name}' has been successfully created.`}}));
           this.subjectForm.reset();
@@ -55,5 +56,6 @@ export class SchoolSubjectsAddComponent {
         }
       });
     });
+    this.submitTriggerSubject$.next(true);
   }
 }
