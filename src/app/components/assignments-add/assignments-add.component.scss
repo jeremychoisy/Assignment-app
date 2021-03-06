@@ -14,6 +14,11 @@
   }
 }
 
+.stepper-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 .stepper-button {
   margin: 10px;
 }

@@ -9,6 +9,7 @@ export interface AssignmentEntitiesState extends EntityState<Assignment> {
 export interface AssignmentState {
   onGoingAssignments: AssignmentEntitiesState;
   doneAssignments: AssignmentEntitiesState;
+  rootAssignments: AssignmentEntitiesState;
   selectedAssignmentId: string | null;
   isLoading: boolean;
 }

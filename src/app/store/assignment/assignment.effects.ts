@@ -3,7 +3,14 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {of} from 'rxjs';
 import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 import {pushMessage} from '../message/index';
-import {createAssignmentFromApi, loadAssignmentsFromApi, setAssignments, setAssignmentsLoadingStatus} from './assignment.actions';
+import {
+  createAssignmentFromApi,
+  deleteAssignmentFromApi,
+  loadAssignmentsFromApi,
+  setAssignments,
+  setAssignmentsLoadingStatus,
+  updateAssignmentFromApi
+} from './assignment.actions';
 
 @Injectable()
 export class AssignmentEffects {
@@ -38,5 +45,41 @@ export class AssignmentEffects {
               )
           )
       )
+  );
+
+  updateAssignmentFromApi$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateAssignmentFromApi),
+      switchMap(action =>
+        action.call.pipe(
+          switchMap((updateAssignmentReply) => [
+            pushMessage({message: {type: 'success', content: `The assignment '${updateAssignmentReply.updatedRootAssignment.name}' has been successfully updated, updating ${updateAssignmentReply.nbOfUpdatedDocuments} assignment(s).`}}),
+            setAssignmentsLoadingStatus({status: false})
+          ]),
+          catchError((err) => of(
+            pushMessage({message: {type: 'error', content: `Something went wrong while updating the assignment (error code :${err.status})`}}),
+            setAssignmentsLoadingStatus({status: false})
+          ))
+        )
+      )
+    )
+  );
+
+  deleteAssignmentFromApi$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteAssignmentFromApi),
+      switchMap(action =>
+        action.call.pipe(
+          switchMap(() => [
+            pushMessage({message: {type: 'success', content: `The assignment has been successfully deleted.`}}),
+            setAssignmentsLoadingStatus({status: false})
+          ]),
+          catchError((err) => of(
+            pushMessage({message: {type: 'error', content: `Something went wrong while deleting the assignment (error code :${err.status})`}}),
+            setAssignmentsLoadingStatus({status: false})
+          ))
+        )
+      )
+    )
   );
 }

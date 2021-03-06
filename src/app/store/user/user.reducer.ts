@@ -15,15 +15,15 @@ export const reducer = createReducer(
     (state, action) => ({...state, user: action.user, isLoading: false})
   ),
   on(UserActions.logInUserFromApi,
-    (state) => ({...state, isLoading: true, failure: undefined})
+    (state) => ({...state, isLoading: true})
+  ),
+  on(UserActions.getUserFromApi,
+    (state) => ({...state, isLoading: true})
   ),
   on(UserActions.logOutUser,
     (state) => {
       sessionStorage.removeItem('token');
       return {...state, user: null};
     }
-  ),
-  on(UserActions.setUserFailureStatus,
-    (state, action) => ({...state, isLoading: false, failureStatus: action.status})
   )
 );

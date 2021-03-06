@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {apiConfig} from '../config/index';
-import {GetStudentsForSchoolSubjectReply, LogInReply} from '../models/index';
+import {GetStudentsForSchoolSubjectReply, GetUserReply, LogInReply} from '../models/index';
 import {HttpClientWrapperService} from './http-client-wrapper.service';
 
 @Injectable({
@@ -18,5 +18,9 @@ export class UserApiService {
 
   public getStudentsForSchoolSubject$(subjectId: string): Observable<GetStudentsForSchoolSubjectReply> {
     return this.httpClientWrapperService.get<GetStudentsForSchoolSubjectReply>(apiConfig.baseUrl + '/user/subject/' + subjectId);
+  }
+
+  public getUser$(userId: string): Observable<GetUserReply> {
+    return this.httpClientWrapperService.get<GetUserReply>(apiConfig.baseUrl + '/user/' + userId);
   }
 }

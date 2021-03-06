@@ -1,0 +1,19 @@
+.update-subject-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-field {
+  margin: 20px 0;
+  width: 25%;
+}
+
+.delete-button-container {
+  text-align: end;
+}
+
+.subject-picture {
+  width: 30px;
+  height: 30px;
+}

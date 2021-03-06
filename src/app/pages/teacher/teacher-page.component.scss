@@ -1,0 +1,13 @@
+.subject-data {
+  display: flex;
+  align-items: center;
+
+  .subject-picture {
+    height: 30px;
+    width: 30px;
+  }
+
+  .subject-name {
+    margin-left: 1rem;
+  }
+}

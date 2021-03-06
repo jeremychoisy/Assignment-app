@@ -21,6 +21,10 @@ export class HttpClientWrapperService {
     return this.httpClient.post<T>(url, body, this.buildAuthorizationHeader());
   }
 
+  public patch<T>(url: string, body: any): Observable<T> {
+    return this.httpClient.patch<T>(url, body, this.buildAuthorizationHeader());
+  }
+
   public delete<T>(url: string): Observable<T> {
     return this.httpClient.delete<T>(url, this.buildAuthorizationHeader());
   }

@@ -2,6 +2,7 @@
   <button type="button" mat-raised-button (click)="openInput()">
     <span [innerHTML]="buttonLabel || 'Select a file to upload'"></span>
   </button>
+  <span class="file-name" *ngIf="selectedFile">{{selectedFile.name}}</span>
   <input #inputFile hidden class="file-input" type="file" (change)="onChange($event)">
 </div>
 

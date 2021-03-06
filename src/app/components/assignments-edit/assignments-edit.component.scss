@@ -1,0 +1,28 @@
+.name-form, .subject-form, .submission-date-form, .remarks-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-field {
+  margin: 20px 0;
+  width: 25%;
+
+  &.remarks {
+    width: 75%;
+    margin-bottom: 60px;
+  }
+}
+
+.stepper-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stepper-button {
+  margin: 10px;
+}
+
+.delete-button-container {
+  text-align: end;
+}
