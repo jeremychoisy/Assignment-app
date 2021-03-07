@@ -9,6 +9,7 @@ import {AuthGuardModule} from '../../guards/auth-guard/auth-guard.module';
 import {AuthGuard} from '../../guards/auth-guard/auth.guard';
 import {HomePageComponent} from './home-page.component';
 import {MessageStoreModule} from '../../store/message/message.module';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), MatCardModule, MatButtonModule, AuthGuardModule, MatTabsModule, SchoolSubjectModule, MessageStoreModule],
+    imports: [CommonModule, RouterModule.forChild(routes), MatCardModule, MatButtonModule, AuthGuardModule, MatTabsModule, SchoolSubjectModule, MessageStoreModule, MatProgressSpinnerModule],
   declarations: [HomePageComponent],
 
 })

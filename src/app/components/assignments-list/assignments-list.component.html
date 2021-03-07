@@ -1,57 +1,64 @@
-<!--<div cdkDropListGroup>
-  <div class="done-assignments"
-       cdkDropList
-       [cdkDropListData]="doneAssignments"
-       (cdkDropListDropped)="drop($event)">
-    <mat-card *ngFor="let assignment of doneAssignments;let index = index" cdkDrag>
-      <span [innerHTML]="'assignment ' + index"></span>
-    </mat-card>
-  </div>
-  <div class="on-going-assignments"
-       cdkDropList
-       [cdkDropListData]="onGoingAssignments"
-       (cdkDropListDropped)="drop($event)">
-    <mat-card *ngFor="let assignment of onGoingAssignments;let index = index" cdkDrag>
-      <span [innerHTML]="'assignment ' + (index + 5)"></span>
-    </mat-card>
-  </div>
-</div>
-<ng-template #noAssignment></ng-template>-->
+<ng-template #noAssignment></ng-template>
 <ng-container *ngIf="assignmentsList$ | async as assignmentsList">
-  <table mat-table [dataSource]="assignmentsList" (scroll)="onTableScroll({$event : $event})">
 
-    <ng-container *ngIf="displayedColumns$ | async as displayedColumns">
-      <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns | slice:0 : -1">
-        <th mat-header-cell *matHeaderCellDef>{{column}}</th>
-        <td mat-cell *matCellDef="let item">{{getCellValue(item, column)}}</td>
-      </ng-container>
+  <table mat-table [dataSource]="assignmentsList">
+    <div style="overflow: auto;max-height: 30em" (scroll)="onTableScroll({$event : $event})">
+      <ng-container *ngIf="displayedColumns$ | async as displayedColumns; ">
+        <ng-container *ngIf="userLevel$ | async as userLevel">
 
-      <ng-container matColumnDef="Work">
-        <th mat-header-cell *matHeaderCellDef> Work</th>
-        <ng-container *ngIf="!doneStatus">
-          <td mat-cell *matCellDef="let item">
-            <ng-container *ngIf="userLevel$ | async as userLevel">
-              <a *ngIf="userLevel === 'teacher';else studentUpload"
-                 class="material-icons link-download-upload"
-                 aria-label="Upload or download icon"
-                 href="{{item.assignmentUrl}}" download="{{item.name}}">download</a>
-              <ng-template #studentUpload>
-                <!-- Todo upload file -->
-              </ng-template>
+          <ng-container matColumnDef="{{column}}" *ngFor="let column of getGenericDisplayedColumns(displayedColumns)">
+            <th mat-header-cell *matHeaderCellDef>{{column}}</th>
+            <td mat-cell *matCellDef="let item">{{getCellValue(item, column)}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="Work">
+            <th mat-header-cell *matHeaderCellDef> Work</th>
+            <ng-container *ngIf="!doneStatus">
+              <td mat-cell *matCellDef="let item">
+                <!-- Student case -->
+                <ng-container *ngIf="userLevel=== 'student'">
+                  <a *ngIf="item.assignmentUrl" class="material-icons link-download-upload"
+                     aria-label="Download icon"
+                     target="_blank" href="{{item.assignmentUrl}}" download="{{item.name}}">download</a>
+                  <button class="material-icons"
+                          aria-label="Upload button" (click)="openUploadDialog(item)">upload
+                  </button>
+                </ng-container>
+
+                <ng-container *ngIf="userLevel=== 'teacher'">
+                  <a *ngIf="item.assignmentUrl" class="material-icons link-download-upload"
+                     aria-label="Download icon" target="_blank"
+                     href="{{item.assignmentUrl}}" download="{{item.name}}">download</a>
+                  <span *ngIf="!item.assignmentUrl">No file</span>
+                </ng-container>
+
+              </td>
             </ng-container>
-          </td>
+
+            <ng-container *ngIf="doneStatus">
+              <td mat-cell *matCellDef="let item">
+                <a class="material-icons link-download-upload" aria-label="Download icon"
+                   target="_blank" href="{{item.assignmentUrl}}"
+                   download="{{item.name}}">download</a>
+              </td>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="!doneStatus" matColumnDef="Submit">
+            <th mat-header-cell *matHeaderCellDef> Submit</th>
+            <td mat-cell *matCellDef="let item">
+              <button class="material-icons"
+                      aria-label="Submit icon" (click)="openSubmit(item, userLevel)">download_done
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns ; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </ng-container>
-        <ng-container *ngIf="doneStatus">
-          <td mat-cell *matCellDef="let item">
-            <a class="material-icons link-download-upload" aria-label="Download icon" href="{{item.assignmentUrl}}"
-               download="{{item.name}}">download</a>
-          </td>
-        </ng-container>
+
       </ng-container>
-
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns ; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </ng-container>
+    </div>
   </table>
 </ng-container>
+

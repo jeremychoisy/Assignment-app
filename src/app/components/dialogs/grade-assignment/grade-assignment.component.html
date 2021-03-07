@@ -1,13 +1,16 @@
 <div class="delete-button-container">
-    <form [formGroup]="gradeForm" (ngSubmit)="onApprove()">
-        <mat-form-field class="form-field">
-            <mat-label>Enter a grade</mat-label>
-            <input matInput type="text" formControlName="grade">
-            <mat-error>A valid grade (0-20) is required.</mat-error>
-        </mat-form-field>
-    </form>
+  <form [formGroup]="gradeForm" (ngSubmit)="onApprove()">
+    <mat-form-field class="form-field">
+      <mat-label>Enter a grade</mat-label>
+      <input matInput type="text" formControlName="grade">
+      <mat-error>A valid grade (0-20) is required.</mat-error>
+    </mat-form-field>
+
     <div class="buttons-containers">
-        <button mat-raised-button color="primary" class="approve-button" type="submit" [disabled]="!gradeForm.valid">Approve</button>
-        <button mat-raised-button color="warn" class="cancel-button" type="button" (click)="onDecline()">Cancel</button>
+      <button mat-raised-button color="primary" class="approve-button" type="submit" [disabled]="!gradeForm.valid">
+        Approve
+      </button>
+      <button mat-raised-button color="warn" class="cancel-button" type="button" (click)="onDecline()">Cancel</button>
     </div>
+  </form>
 </div>

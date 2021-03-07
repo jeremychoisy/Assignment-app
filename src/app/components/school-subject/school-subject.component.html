@@ -1,13 +1,10 @@
 <div class="table-container">
   <ng-container *ngIf="currentSchoolSubject._id as currentSchoolSubjectId">
-    <div>
+
       <app-assignments-list [currentSchoolSubjectId]="currentSchoolSubjectId"
                             [doneStatus]="false"></app-assignments-list>
-    </div>
 
-    <div>
       <app-assignments-list [currentSchoolSubjectId]="currentSchoolSubjectId"
                             [doneStatus]="true"></app-assignments-list>
-    </div>
   </ng-container>
 </div>

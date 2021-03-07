@@ -1,10 +1,9 @@
 <div class="upload-container">
-    <span>Upload an assignment, if there is already an existing one, it will be overridden.</span>
-    <app-file-input
-            class="form-field"
-            [submitTrigger$]="submitTrigger$"
-            [buttonLabel]="'Choose an assignment to upload'"
-            (receivedUrlEmitter)="onUrlReceived($event)">
-    </app-file-input>
-    <button mat-raised-button color="primary" class="confirm-button" type="button">Confirm</button>
+  <span class="upload-file-Span">Upload an assignment, if there is already an existing one, it will be overridden.</span>
+  <app-file-input class="upload-file"
+    [submitTrigger$]="submitTrigger$"
+    [buttonLabel]="'Choose an assignment to upload'"
+    (receivedUrlEmitter)="onUrlReceived($event)">
+  </app-file-input>
+  <button class="upload-file" mat-raised-button color="primary" class="confirm-button" type="button" (click)="uploadFile()">Confirm</button>
 </div>
