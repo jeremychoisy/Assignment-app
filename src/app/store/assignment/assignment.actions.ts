@@ -4,7 +4,7 @@ import {AssignmentType, CreateAssignmentReply, GetAssignmentsReply, UpdateAssign
 
 export const loadAssignmentsFromApi = createAction(
   '[Assignment/API] load assignments from API for logged user',
-  props<{ call: Observable<GetAssignmentsReply>, assignmentType: AssignmentType}>()
+  props<{ call: Observable<GetAssignmentsReply>, assignmentType: AssignmentType, shouldUpdateLoadingStatus: boolean}>()
 );
 
 export const createAssignmentFromApi = createAction(

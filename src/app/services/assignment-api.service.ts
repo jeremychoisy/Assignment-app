@@ -15,8 +15,8 @@ export class AssignmentApiService {
       return this.httpClientWrapperService.get<GetAssignmentsReply>(apiConfig.baseUrl + '/assignment?subjectId=' + subjectId + '&page=' + pageNumber + '&pageSize=20&isDone=' + isDone);
   }
 
-    public getRootAssignments$(subjectId: string): Observable<GetAssignmentsReply> {
-        return this.httpClientWrapperService.get<GetAssignmentsReply>(apiConfig.baseUrl + '/assignment/root?subjectId=' + subjectId);
+    public getRootAssignments$(subjectId: string, page: number, pageSize: number): Observable<GetAssignmentsReply> {
+        return this.httpClientWrapperService.get<GetAssignmentsReply>(apiConfig.baseUrl + '/assignment/root?subjectId=' + subjectId + '&page=' + page + '&pageSize=' + pageSize);
     }
 
     public createAssignment$(name: string, subjectId: string, submissionDate: Date, remarks?: string): Observable<CreateAssignmentReply> {

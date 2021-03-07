@@ -51,10 +51,11 @@ export class AssignmentsListComponent implements OnInit {
     this.loadAssignments();
   }
 
-  private loadAssignments(): void {
+  private loadAssignments(shouldUpdateLoadingStatus: boolean = true): void {
     this.store.dispatch(loadAssignmentsFromApi({
       call: this.assignmentApiService.getAssignments$(this.currentSchoolSubjectId, this.doneStatus, this.pageNumber),
-      assignmentType: this.doneStatus ? 'done' : 'onGoing'
+      assignmentType: this.doneStatus ? 'done' : 'onGoing',
+      shouldUpdateLoadingStatus
     }));
     this.assignmentsList$ = this.store.pipe(
       select(this.doneStatus ? selectDoneAssignments : selectOnGoingAssignments),

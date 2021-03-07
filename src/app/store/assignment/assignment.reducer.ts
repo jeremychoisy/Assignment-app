@@ -23,7 +23,7 @@ export const reducer = createReducer(
       switch (action.assignmentType) {
         case 'done':
           update = {
-            doneAssignments: adapter.setAll(action.getAssignmentsReply.assignments, {
+            doneAssignments: adapter.addMany(action.getAssignmentsReply.assignments, {
               ...state.doneAssignments,
               isLoading: false,
               totalCount: action.getAssignmentsReply.totalCount
@@ -32,7 +32,7 @@ export const reducer = createReducer(
           break;
         case 'onGoing':
           update = {
-            onGoingAssignments: adapter.setAll(action.getAssignmentsReply.assignments, {
+            onGoingAssignments: adapter.addMany(action.getAssignmentsReply.assignments, {
               ...state.onGoingAssignments,
               isLoading: false,
               totalCount: action.getAssignmentsReply.totalCount
@@ -41,7 +41,7 @@ export const reducer = createReducer(
           break;
         case 'root':
           update = {
-            rootAssignments: adapter.setAll(action.getAssignmentsReply.assignments, {
+            rootAssignments: adapter.addMany(action.getAssignmentsReply.assignments, {
               ...state.rootAssignments,
               isLoading: false,
               totalCount: action.getAssignmentsReply.totalCount
@@ -59,11 +59,11 @@ export const reducer = createReducer(
       ({
         ...state,
         ...(action.assignmentType === 'onGoing' ?
-            {onGoingAssignments: {...state.onGoingAssignments, isLoading: true}}
+            {onGoingAssignments: {...state.onGoingAssignments, isLoading: action.shouldUpdateLoadingStatus}}
             : action.assignmentType === 'done' ?
-            {doneAssignments: {...state.doneAssignments, isLoading: true}}
+            {doneAssignments: {...state.doneAssignments, isLoading: action.shouldUpdateLoadingStatus}}
             :
-            {rootAssignments: {...state.rootAssignments, isLoading: true}}
+            {rootAssignments: {...state.rootAssignments, isLoading: action.shouldUpdateLoadingStatus}}
         )
       })
   ),

@@ -16,8 +16,8 @@ export class UserApiService {
     return this.httpClient.post<LogInReply>(apiConfig.baseUrl + '/user/log-in', {email, password});
   }
 
-  public getStudentsForSchoolSubject$(subjectId: string): Observable<GetStudentsForSchoolSubjectReply> {
-    return this.httpClientWrapperService.get<GetStudentsForSchoolSubjectReply>(apiConfig.baseUrl + '/user/subject/' + subjectId);
+  public getStudentsForSchoolSubject$(subjectId: string, page: number, pageSize: number): Observable<GetStudentsForSchoolSubjectReply> {
+    return this.httpClientWrapperService.get<GetStudentsForSchoolSubjectReply>(apiConfig.baseUrl + '/user/subject/' + subjectId + '?page=' + page + '&pageSize=' + pageSize);
   }
 
   public getUser$(userId: string): Observable<GetUserReply> {

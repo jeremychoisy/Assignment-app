@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {select, Store} from '@ngrx/store';
-import {combineLatest, Observable} from 'rxjs';
-import {map, skipWhile, take} from 'rxjs/operators';
+import {combineLatest, fromEvent, Observable} from 'rxjs';
+import {debounceTime, distinctUntilChanged, map, skipWhile, take, withLatestFrom} from 'rxjs/operators';
 import {Assignment} from '../../models/index';
 import {AssignmentApiService} from '../../services/index';
 import {
@@ -11,7 +11,7 @@ import {
   resetAssignments,
   selectAssignmentsStoreLoadingStatus,
   selectRootAssignments,
-  selectRootAssignmentsLoadingStatus
+  selectRootAssignmentsLoadingStatus, selectRootAssignmentState
 } from '../../store/index';
 import {AssignmentsEditComponent} from '../assignments-edit/assignments-edit.component';
 
@@ -20,7 +20,7 @@ import {AssignmentsEditComponent} from '../assignments-edit/assignments-edit.com
   templateUrl: './root-assignments-list.component.html',
   styleUrls: ['./root-assignments-list.component.scss']
 })
-export class RootAssignmentsListComponent implements OnInit {
+export class RootAssignmentsListComponent implements OnInit, AfterViewInit {
   @Input()
   public subjectId = '';
 
@@ -29,6 +29,13 @@ export class RootAssignmentsListComponent implements OnInit {
   public isLoading$: Observable<boolean>;
 
   public displayedColumns: string[] = ['name', 'creationDate', 'submissionDate'];
+
+  private page = 1;
+  private limit = 20;
+  private totalCount$: Observable<number>;
+
+  @ViewChild('tableContainer', {static: false})
+  private tableContainer?: ElementRef;
 
   constructor(private store: Store<AssignmentStore>, private assignmentApiService: AssignmentApiService, public dialog: MatDialog) {
     this.store.dispatch(resetAssignments());
@@ -39,18 +46,26 @@ export class RootAssignmentsListComponent implements OnInit {
     ]).pipe(
       map(isLoadingStatuses => isLoadingStatuses.some((isLoadingStatus) => isLoadingStatus))
     );
+    this.totalCount$ = this.store.pipe(
+      select(selectRootAssignmentState),
+      map(rootAssignmentState => rootAssignmentState.totalCount)
+    );
   }
 
-  private loadAssignments(): void {
-    this.store.dispatch(resetAssignments());
+  private loadAssignments(shouldUpdateLoadingStatus: boolean = true): void {
     this.store.dispatch(loadAssignmentsFromApi({
-      call: this.assignmentApiService.getRootAssignments$(this.subjectId),
-      assignmentType: 'root'
+      call: this.assignmentApiService.getRootAssignments$(this.subjectId, this.page, this.limit),
+      assignmentType: 'root',
+      shouldUpdateLoadingStatus
     }));
   }
 
   public ngOnInit(): void {
     this.loadAssignments();
+  }
+
+  public ngAfterViewInit(): void {
+    this.setScrollObservable();
   }
 
   public openDialog(assignment: Assignment): void {
@@ -66,8 +81,35 @@ export class RootAssignmentsListComponent implements OnInit {
           select(selectAssignmentsStoreLoadingStatus),
           skipWhile((isLoading) => isLoading),
           take(1)
-        ).subscribe(() => this.loadAssignments());
+        ).subscribe(() => {
+          this.store.dispatch(resetAssignments());
+          this.loadAssignments();
+        });
       }
     });
+  }
+
+  public setScrollObservable(): void {
+    if (this.tableContainer?.nativeElement) {
+      fromEvent(this.tableContainer.nativeElement, 'scroll').pipe(
+        withLatestFrom(this.totalCount$, this.rootAssignments$),
+        debounceTime(50),
+        distinctUntilChanged()
+      ).subscribe(([e, totalCount, rootAssignments]: [any, number, Assignment[]]) => {
+        const tableViewHeight = e.target.offsetHeight;
+        const tableScrollHeight = e.target.scrollHeight;
+        const scrollLocation = e.target.scrollTop;
+
+        // If the user has scrolled within 50px of the bottom, add more data
+        const buffer = 50;
+        const limit = tableScrollHeight - tableViewHeight - buffer;
+        console.log(rootAssignments.length);
+        console.log(totalCount);
+        if (scrollLocation > limit && (rootAssignments.length < totalCount)) {
+          this.page ++;
+          this.loadAssignments(false);
+        }
+      });
+    }
   }
 }
