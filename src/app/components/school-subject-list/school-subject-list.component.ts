@@ -33,7 +33,7 @@ export class SchoolSubjectListComponent {
 
   public displayedColumns: string[] = ['picture', 'name'];
 
-  constructor(private store: Store<UserStore & MessageStore>, private userApiService: UserApiService, private schoolSubjectApiService: SchoolSubjectApiService, public dialog: MatDialog) {
+  constructor(private store: Store<UserStore & MessageStore>, private userApiService: UserApiService, private schoolSubjectApiService: SchoolSubjectApiService, private dialog: MatDialog) {
     this.user$ = this.store.pipe(
       select(selectUser),
       filter((user): user is User => !!user)

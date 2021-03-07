@@ -11,7 +11,7 @@ interface DialogData {
 
 
 @Component({
-  selector: 'app-assignments-edit',
+  selector: 'app-subject-edit',
   templateUrl: './school-subject-edit.component.html',
   styleUrls: ['./school-subject-edit.component.scss']
 })

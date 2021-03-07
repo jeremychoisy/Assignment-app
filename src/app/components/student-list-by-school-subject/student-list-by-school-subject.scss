@@ -8,7 +8,8 @@ table {
   width: 100%;
 }
 
-.mat-row:hover {
+.mat-row.waiting-for-approval:hover {
+
   background-color: #4169E1;
   cursor: pointer;
 
