@@ -8,7 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
-import {AssignmentStoreModule} from '../../store/assignment/assignment.module';
+import {AssignmentStoreModule} from '../../../store/assignment/assignment.module';
 import {AssignmentsEditComponent} from './assignments-edit.component';
 
 @NgModule({

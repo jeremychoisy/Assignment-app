@@ -6,7 +6,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
 import {MessageStoreModule} from '../../store/message/message.module';
 import {UserStoreModule} from '../../store/user/user.module';
-import {SchoolSubjectEditModule} from '../school-subject-edit/school-subject-edit.module';
+import {SchoolSubjectEditModule} from '../dialogs/school-subject-edit/school-subject-edit.module';
 import {SchoolSubjectListComponent} from './school-subject-list.component';
 
 @NgModule({

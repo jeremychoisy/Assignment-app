@@ -2,9 +2,9 @@ import {Component, Inject} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Store} from '@ngrx/store';
-import {Assignment} from '../../models/index';
-import {AssignmentApiService} from '../../services/index';
-import {AssignmentStore, clearMessages, deleteAssignmentFromApi, updateAssignmentFromApi} from '../../store/index';
+import {Assignment} from '../../../models';
+import {AssignmentApiService} from '../../../services';
+import {AssignmentStore, clearMessages, deleteAssignmentFromApi, updateAssignmentFromApi} from '../../../store';
 
 interface DialogData {
   assignment: Assignment;
@@ -51,7 +51,7 @@ export class AssignmentsEditComponent {
 
     if (name && submissionDate && this.data.assignment._id) {
       this.store.dispatch(updateAssignmentFromApi({
-        call: this.assignmentApiService.updateAssignment$(this.data.assignment._id, name, new Date(submissionDate), remarks)
+        call: this.assignmentApiService.updateRootAssignment$(this.data.assignment._id, name, new Date(submissionDate), remarks)
       }));
     }
 

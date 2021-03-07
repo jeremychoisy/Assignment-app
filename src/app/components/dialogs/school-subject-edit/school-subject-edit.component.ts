@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Observable, Subject} from 'rxjs';
 import {take} from 'rxjs/operators';
-import {SchoolSubject} from '../../models/index';
+import {SchoolSubject} from '../../../models';
 
 interface DialogData {
   schoolSubject: SchoolSubject;
@@ -11,7 +11,7 @@ interface DialogData {
 
 
 @Component({
-  selector: 'app-subject-edit',
+  selector: 'app-school-subject-edit',
   templateUrl: './school-subject-edit.component.html',
   styleUrls: ['./school-subject-edit.component.scss']
 })

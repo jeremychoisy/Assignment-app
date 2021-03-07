@@ -14,7 +14,7 @@ import {
   selectUserStoreLoadingStatus,
   UserStore
 } from '../../store/index';
-import {SchoolSubjectEditComponent} from '../school-subject-edit/school-subject-edit.component';
+import {SchoolSubjectEditComponent} from '../dialogs/school-subject-edit/school-subject-edit.component';
 
 @Component({
   selector: 'app-school-subject-list',

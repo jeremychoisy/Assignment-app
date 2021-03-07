@@ -4,8 +4,8 @@ import {NgModule} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {AssignmentStoreModule} from '../../store/assignment/assignment.module';
+import {FileInputModule} from '../file-input/file-input.module';
 import {AssignmentsListComponent} from './assignments-list.component';
-import {FileInputModule} from "../file-input/file-input.module";
 
 
 @NgModule({

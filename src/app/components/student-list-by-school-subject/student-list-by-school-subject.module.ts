@@ -7,7 +7,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
 import {StatusIconPipeModule} from '../../pipes/status-icon';
 import {AssignmentStoreModule} from '../../store/assignment/assignment.module';
-import {UpdateStudentStatusModule} from '../update-student-status/update-student-status.module';
+import {UpdateStudentStatusModule} from '../dialogs/update-student-status/update-student-status.module';
 import {StudentListBySchoolSubjectComponent} from './student-list-by-school-subject.component';
 
 @NgModule({

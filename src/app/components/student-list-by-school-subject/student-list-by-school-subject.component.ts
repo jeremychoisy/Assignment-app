@@ -6,7 +6,7 @@ import {catchError, debounceTime, distinctUntilChanged, take} from 'rxjs/operato
 import {User} from '../../models/index';
 import {UserApiService} from '../../services/index';
 import {clearMessages, MessageStore, pushMessage} from '../../store/index';
-import {UpdateStudentStatusComponent} from '../update-student-status/update-student-status.component';
+import {UpdateStudentStatusComponent} from '../dialogs/update-student-status/update-student-status.component';
 
 @Component({
   selector: 'app-student-list-by-school-subject',

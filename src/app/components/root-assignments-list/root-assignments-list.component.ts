@@ -13,7 +13,7 @@ import {
   selectRootAssignments,
   selectRootAssignmentsLoadingStatus, selectRootAssignmentState
 } from '../../store/index';
-import {AssignmentsEditComponent} from '../assignments-edit/assignments-edit.component';
+import {AssignmentsEditComponent} from '../dialogs/assignments-edit/assignments-edit.component';
 
 @Component({
   selector: 'app-root-assignments-list',

@@ -3,7 +3,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 
 
 @Component({
-  selector: 'app-assignments-edit',
+  selector: 'app-update-student-status',
   templateUrl: './update-student-status.component.html',
   styleUrls: ['./update-student-status.component.scss']
 })
