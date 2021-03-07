@@ -1,3 +1,35 @@
-.on-going-assignments, .done-assignments {
-  margin: 10rem 0;
+.table-container {
+  position: relative;
+  max-height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-row:hover {
+  background-color: #4169E1;
+  cursor: pointer;
+
+  .mat-cell {
+    color: white;
+  }
+}
+
+.avatar-container {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.no-student {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
 }

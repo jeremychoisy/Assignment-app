@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {User} from '../../models';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, take} from 'rxjs/operators';
+import {User} from '../../models/index';
 import {UserApiService} from '../../services/index';
 import {MessageStore, pushMessage} from '../../store/index';
-import {catchError, take} from 'rxjs/operators';
-import {of} from 'rxjs';
 
 @Component({
   selector: 'app-student-list-by-school-subject',
@@ -17,20 +17,29 @@ export class StudentListBySchoolSubjectComponent implements OnInit {
 
   public studentsList: User[] = [];
 
+  private isLoadingSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isLoading$: Observable<boolean> = this.isLoadingSubject$.asObservable();
+
+  public displayedColumns: string[] = ['avatar', 'email', 'name'];
+
   constructor(private store: Store<MessageStore>, private userApiService: UserApiService) {}
 
-  public ngOnInit(): void {
-    // TODO: IS PENDING TRUE
+  private refreshStudentsList(): void {
+    this.isLoadingSubject$.next(true);
     this.userApiService.getStudentsForSchoolSubject$(this.subjectId).pipe(
       take(1),
       catchError((err) => of(err.status))
     ).subscribe((res) => {
-      // TODO: IS PENDING FALSE
+      this.isLoadingSubject$.next(false);
       if (res.users) {
         this.studentsList = res.users;
       } else {
         this.store.dispatch(pushMessage({message: {type: 'error', content: `Something went wrong while fetching the list of students (error code :${res})`}}));
       }
     });
+  }
+
+  public ngOnInit(): void {
+    this.refreshStudentsList();
   }
 }

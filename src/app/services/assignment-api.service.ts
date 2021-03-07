@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {apiConfig} from '../config/index';
-import {CreateAssignmentReply, GetAssignmentsReply} from '../models/index';
+import {CreateAssignmentReply, GetAssignmentsReply, UpdateAssignmentReply} from '../models/index';
 import {HttpClientWrapperService} from './http-client-wrapper.service';
 
 @Injectable({
@@ -11,12 +11,8 @@ export class AssignmentApiService {
   constructor(private httpClientWrapperService: HttpClientWrapperService) {
   }
 
-  public getAssignments$(subjectId: string, isDone: boolean, pageNumber?: number): Observable<GetAssignmentsReply> {
-    if (pageNumber !== undefined) {
+  public getAssignments$(subjectId: string, isDone: boolean, pageNumber: number): Observable<GetAssignmentsReply> {
       return this.httpClientWrapperService.get<GetAssignmentsReply>(apiConfig.baseUrl + '/assignment?subjectId=' + subjectId + '&page=' + pageNumber + '&pageSize=20&isDone=' + isDone);
-    } else {
-      return this.httpClientWrapperService.get<GetAssignmentsReply>(apiConfig.baseUrl + '/assignment');
-    }
   }
 
     public getRootAssignments$(subjectId: string): Observable<GetAssignmentsReply> {
