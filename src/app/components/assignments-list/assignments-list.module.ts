@@ -5,10 +5,11 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {AssignmentStoreModule} from '../../store/assignment/assignment.module';
 import {AssignmentsListComponent} from './assignments-list.component';
+import {FileInputModule} from "../file-input/file-input.module";
 
 
 @NgModule({
-  imports: [CommonModule, AssignmentStoreModule, DragDropModule, MatCardModule, MatTableModule],
+  imports: [CommonModule, AssignmentStoreModule, DragDropModule, MatCardModule, MatTableModule, FileInputModule],
   declarations: [AssignmentsListComponent],
   exports: [AssignmentsListComponent],
   providers: [DatePipe]

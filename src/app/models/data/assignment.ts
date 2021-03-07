@@ -13,4 +13,5 @@ export interface Assignment extends MongoEntity {
   submissionDate?: Date;
   isSubmitted: boolean;
   remarks?: string;
+  assignmentUrl?: string;
 }

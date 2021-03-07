@@ -38,9 +38,9 @@ export class AssignmentsListComponent implements OnInit {
       filter(userLevel => !!userLevel),
       map(userLevel => {
         if (userLevel === 'student') {
-          return this.doneStatus ? ['Name', 'Score', 'Submission Date', 'Work'] : ['Name', 'Work'];
-        } else {
           return this.doneStatus ? ['Name', 'Score', 'Work'] : ['Name', 'Submission Date', 'Work'];
+        } else {
+          return this.doneStatus ? ['Name', 'Score', 'Submission Date', 'Work'] : ['Name', 'Creation Date', 'Work'];
         }
       })
     );
@@ -78,13 +78,18 @@ export class AssignmentsListComponent implements OnInit {
 
   getCellValue(item: Assignment, element: string): string {
 
+    let date;
     switch (element) {
       case 'Name':
         return item.name || 'Unknown';
       case 'Score':
         return item.score?.toString() || 'No scored';
       case 'Submission Date':
-        const date = this.datePipe.transform(item.submissionDate, 'dd-MM-yyyy');
+        date = this.datePipe.transform(item.submissionDate, 'dd-MM-yyyy');
+        return date?.toString() || 'No date';
+      case 'Creation Date':
+        console.log('in creation date');
+        date = this.datePipe.transform(item.creationDate, 'dd-MM-yyyy');
         return date?.toString() || 'No date';
       default:
         return '';

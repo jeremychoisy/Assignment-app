@@ -30,12 +30,21 @@
         <th mat-header-cell *matHeaderCellDef> Work</th>
         <ng-container *ngIf="!doneStatus">
           <td mat-cell *matCellDef="let item">
-            <span class="material-icons" aria-label="Upload icon">upload</span>
+            <ng-container *ngIf="userLevel$ | async as userLevel">
+              <a *ngIf="userLevel === 'teacher';else studentUpload"
+                 class="material-icons link-download-upload"
+                 aria-label="Upload or download icon"
+                 href="{{item.assignmentUrl}}" download="{{item.name}}">download</a>
+              <ng-template #studentUpload>
+                <!-- Todo upload file -->
+              </ng-template>
+            </ng-container>
           </td>
         </ng-container>
         <ng-container *ngIf="doneStatus">
           <td mat-cell *matCellDef="let item">
-            <span class="material-icons" aria-label="Download icon">download</span>
+            <a class="material-icons link-download-upload" aria-label="Download icon" href="{{item.assignmentUrl}}"
+               download="{{item.name}}">download</a>
           </td>
         </ng-container>
       </ng-container>
