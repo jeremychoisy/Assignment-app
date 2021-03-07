@@ -23,7 +23,7 @@ export const reducer = createReducer(
       switch (action.assignmentType) {
         case 'done':
           update = {
-            doneAssignments: adapter.addMany(action.getAssignmentsReply.assignments, {
+            doneAssignments: adapter.setAll(action.getAssignmentsReply.assignments, {
               ...state.doneAssignments,
               isLoading: false,
               totalCount: action.getAssignmentsReply.totalCount
@@ -32,7 +32,7 @@ export const reducer = createReducer(
           break;
         case 'onGoing':
           update = {
-            onGoingAssignments: adapter.addMany(action.getAssignmentsReply.assignments, {
+            onGoingAssignments: adapter.setAll(action.getAssignmentsReply.assignments, {
               ...state.onGoingAssignments,
               isLoading: false,
               totalCount: action.getAssignmentsReply.totalCount
@@ -41,7 +41,7 @@ export const reducer = createReducer(
           break;
         case 'root':
           update = {
-            rootAssignments: adapter.addMany(action.getAssignmentsReply.assignments, {
+            rootAssignments: adapter.setAll(action.getAssignmentsReply.assignments, {
               ...state.rootAssignments,
               isLoading: false,
               totalCount: action.getAssignmentsReply.totalCount
