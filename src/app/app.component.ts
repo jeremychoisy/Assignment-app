@@ -43,4 +43,8 @@ export class AppComponent {
   public navigateToTeacherPage(): void {
     this.router.navigateByUrl(RoutesEnum.teacher);
   }
+
+  public navigateToSubjectsPage(): void {
+    this.router.navigateByUrl(RoutesEnum.subjects);
+  }
 }

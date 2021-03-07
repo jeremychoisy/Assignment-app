@@ -22,6 +22,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/teacher/teacher-page.module').then((m) => m.TeacherPageModule)
   },
   {
+    path: RoutesEnum.subjects,
+    loadChildren: () => import('./pages/subjects/subjects-page.module').then((m) => m.SubjectsPageModule)
+  },
+  {
     path: '**',
     redirectTo: RoutesEnum.home,
     pathMatch: 'full'

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {apiConfig} from '../config/index';
-import {CreateSchoolSubjectReply} from '../models/index';
+import {CreateSchoolSubjectReply, GetAssignmentsReply, GetSchoolSubjectReply} from '../models/index';
 import {HttpClientWrapperService} from './http-client-wrapper.service';
 
 @Injectable({
@@ -31,5 +31,9 @@ export class SchoolSubjectApiService {
 
     public deleteSubject$(subjectId: string): Observable<any> {
         return this.httpClientWrapperService.delete<any>(apiConfig.baseUrl + '/subject/' + subjectId);
+    }
+
+    public getSubjects$(): Observable<GetSchoolSubjectReply> {
+        return this.httpClientWrapperService.get<GetSchoolSubjectReply>(apiConfig.baseUrl + '/subject');
     }
 }

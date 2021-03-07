@@ -6,17 +6,24 @@
   <span>Assignment Application</span>
   </div>
   <div class="right-section">
+    <button *ngIf="(isUserLogged$ | async) && !(isTeacherLogged$ | async)"
+            mat-icon-button
+            class="subjects-icon"
+            aria-label="list of subjects button"
+            (click)="navigateToSubjectsPage()">
+      <mat-icon>school</mat-icon>
+    </button>
     <button *ngIf="isTeacherLogged$ | async"
             mat-icon-button
             class="manage-icon"
-            aria-label="manage icon"
+            aria-label="manage button"
             (click)="navigateToTeacherPage()">
       <mat-icon>manage_accounts</mat-icon>
     </button>
     <button *ngIf="isUserLogged$ | async"
             mat-icon-button
             class="logout-icon"
-            aria-label="logout icon"
+            aria-label="logout button"
             (click)="logOut()">
       <mat-icon>logout</mat-icon>
     </button>

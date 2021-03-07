@@ -17,13 +17,13 @@ import {
 import {SchoolSubjectEditComponent} from '../dialogs/school-subject-edit/school-subject-edit.component';
 
 @Component({
-  selector: 'app-school-subject-list',
-  templateUrl: './school-subject-list.component.html',
-  styleUrls: ['./school-subject-list.component.scss']
+  selector: 'app-school-subject-list-teacher',
+  templateUrl: './school-subject-list-teacher.component.html',
+  styleUrls: ['./school-subject-list-teacher.component.scss']
 })
-export class SchoolSubjectListComponent {
+export class SchoolSubjectListTeacherComponent {
   public user$: Observable<User>;
-  public subject$: Observable<SchoolSubject[]>;
+  public subjects$: Observable<SchoolSubject[]>;
 
   private isLoadingSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -38,7 +38,7 @@ export class SchoolSubjectListComponent {
       select(selectUser),
       filter((user): user is User => !!user)
     );
-    this.subject$ = this.user$.pipe(
+    this.subjects$ = this.user$.pipe(
       map((user) => user.subjects)
     );
     this.isStoreLoading$ = this.store.pipe(

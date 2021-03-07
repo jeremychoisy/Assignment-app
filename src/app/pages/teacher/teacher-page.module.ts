@@ -3,15 +3,15 @@ import {NgModule} from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import {RouterModule, Routes} from '@angular/router';
 import {AssignmentsAddModule} from '../../components/assignments-add/assignments-add.module';
+import {RootAssignmentsListModule} from '../../components/root-assignments-list/root-assignments-list.module';
+import {SchoolSubjectListTeacherModule} from '../../components/school-subject-list-teacher/school-subject-list-teacher.module';
 import {SchoolSubjectsAddModule} from '../../components/school-subjects-add/school-subjects-add.module';
+import {StudentListBySchoolSubjectModule} from '../../components/student-list-by-school-subject/student-list-by-school-subject.module';
 import {TeacherAuthGuardModule} from '../../guards/teacher-auth-guard/teacher-auth-guard.module';
 import {TeacherAuthGuard} from '../../guards/teacher-auth-guard/teacher-auth.guard';
+import {MessageStoreModule} from '../../store/message/message.module';
 import {UserStoreModule} from '../../store/user/user.module';
 import {TeacherPageComponent} from './teacher-page.component';
-import {MessageStoreModule} from '../../store/message/message.module';
-import {StudentListBySchoolSubjectModule} from '../../components/student-list-by-school-subject/student-list-by-school-subject.module';
-import {RootAssignmentsListModule} from '../../components/root-assignments-list/root-assignments-list.module';
-import {SchoolSubjectListModule} from '../../components/school-subject-list/school-subject-list.module';
 
 const routes: Routes = [
   {
@@ -33,7 +33,7 @@ const routes: Routes = [
     MessageStoreModule,
     StudentListBySchoolSubjectModule,
     RootAssignmentsListModule,
-    SchoolSubjectListModule
+    SchoolSubjectListTeacherModule
   ],
   declarations: [TeacherPageComponent],
 })

@@ -3,7 +3,7 @@
     <mat-spinner></mat-spinner>
   </div>
 
-  <ng-container *ngIf="subject$ | async as subject">
+  <ng-container *ngIf="subjects$ | async as subject">
     <div class="table-container">
       <table *ngIf="subject.length;else noSubject" mat-table [dataSource]="subject" class="table">
         <ng-container matColumnDef="picture">

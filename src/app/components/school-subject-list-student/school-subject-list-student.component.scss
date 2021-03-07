@@ -1,0 +1,30 @@
+.table-container {
+  position: relative;
+  max-height: 600px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.no-subject {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.mat-row.available:hover {
+  background-color: #4169E1;
+  cursor: pointer;
+
+  .mat-cell {
+    color: white;
+  }
+}
+
+.subject-picture {
+  width: 30px;
+  height: 30px;
+}

@@ -6,7 +6,10 @@ import {User} from '../../models/index';
 })
 export class StatusIconPipe implements PipeTransform {
 
-  transform(user: User, subjectId: string): string {
-    return !!user.subjects.find((subject) => subject._id === subjectId) ? 'check_box' : 'pending_actions';
+  transform(user: User, subjectId: string): string | undefined {
+    return !!user.subjects.find((subject) => subject._id === subjectId) ? 'check_box'
+      :
+      !!user.requestedSubjects.find((subject) => subject._id === subjectId) ? 'pending_actions' :
+        undefined;
   }
 }

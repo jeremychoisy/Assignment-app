@@ -14,6 +14,7 @@ export class TeacherPageComponent {
   public user$: Observable<User>;
 
   constructor(private store: Store<UserStore & MessageStore>) {
+    this.store.dispatch(clearMessages());
     this.user$ = this.store.pipe(
       select(selectUser),
       filter((user): user is User => !!user)

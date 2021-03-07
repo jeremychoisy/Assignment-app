@@ -7,9 +7,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {RouterModule, Routes} from '@angular/router';
+import {MessageStoreModule} from '../../store/message/message.module';
 import {UserStoreModule} from '../../store/user/user.module';
 import {LoginPageComponent} from './login-page.component';
-import {MessageStoreModule} from '../../store/message/message.module';
 
 const routes: Routes = [
   {
@@ -22,7 +22,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    UserStoreModule, MatCardModule,
+    UserStoreModule,
+    MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatIconModule,

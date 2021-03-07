@@ -1,5 +1,6 @@
 export const enum RoutesEnum {
   home = 'home',
   login = 'login',
-  teacher = 'teacher'
+  teacher = 'teacher',
+  subjects = 'subjects'
 }

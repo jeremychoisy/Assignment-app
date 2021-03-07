@@ -8,6 +8,7 @@ import {SchoolSubjectModule} from '../../components/school-subject/school-subjec
 import {AuthGuardModule} from '../../guards/auth-guard/auth-guard.module';
 import {AuthGuard} from '../../guards/auth-guard/auth.guard';
 import {HomePageComponent} from './home-page.component';
+import {MessageStoreModule} from '../../store/message/message.module';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), MatCardModule, MatButtonModule, AuthGuardModule, MatTabsModule, SchoolSubjectModule],
+  imports: [CommonModule, RouterModule.forChild(routes), MatCardModule, MatButtonModule, AuthGuardModule, MatTabsModule, SchoolSubjectModule, MessageStoreModule],
   declarations: [HomePageComponent],
 
 })

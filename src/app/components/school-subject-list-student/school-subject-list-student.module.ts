@@ -2,12 +2,14 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
+import {StatusIconPipeModule} from '../../pipes/status-icon';
 import {MessageStoreModule} from '../../store/message/message.module';
 import {UserStoreModule} from '../../store/user/user.module';
-import {SchoolSubjectEditModule} from '../dialogs/school-subject-edit/school-subject-edit.module';
-import {SchoolSubjectListComponent} from './school-subject-list.component';
+import {ApplySubjectModule} from '../dialogs/apply-subject/apply-subject.module';
+import {SchoolSubjectListStudentComponent} from './school-subject-list-student.component';
 
 @NgModule({
   imports: [
@@ -16,12 +18,14 @@ import {SchoolSubjectListComponent} from './school-subject-list.component';
     MatTableModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    SchoolSubjectEditModule,
+    ApplySubjectModule,
     UserStoreModule,
-    MessageStoreModule
+    MessageStoreModule,
+    MatIconModule,
+    StatusIconPipeModule
   ],
-  declarations: [SchoolSubjectListComponent],
-  exports: [SchoolSubjectListComponent]
+  declarations: [SchoolSubjectListStudentComponent],
+  exports: [SchoolSubjectListStudentComponent]
 })
-export class SchoolSubjectListModule {
+export class SchoolSubjectListStudentModule {
 }

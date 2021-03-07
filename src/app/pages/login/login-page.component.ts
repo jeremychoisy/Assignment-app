@@ -23,6 +23,7 @@ export class LoginPageComponent implements OnInit {
     private router: Router,
     private userApiService: UserApiService,
     private store: Store<UserStore & MessageStore>) {
+    this.store.dispatch(clearMessages());
   }
 
   ngOnInit(): void {

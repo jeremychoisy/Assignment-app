@@ -31,4 +31,8 @@ export class UserApiService {
   public declineStudent$(userId: string, subjectId: string): Observable<any> {
     return this.httpClientWrapperService.patch<any>(apiConfig.baseUrl + '/user/decline/' + userId, {subjectId});
   }
+
+  public applyStudent$(subjectId: string): Observable<any> {
+    return this.httpClientWrapperService.patch<any>(apiConfig.baseUrl + '/user/apply', {subjectId});
+  }
 }
