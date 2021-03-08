@@ -2,6 +2,15 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.6.
 
+## Demonstration
+
+Link our youtube video for the project : https://youtu.be/ob12H4F13k4
+
+## Github project
+
+Link to our github project :
+[App](https://github.com/jeremychoisy/Assignment-app) and [server](https://github.com/jeremychoisy/Assignment-server)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change
